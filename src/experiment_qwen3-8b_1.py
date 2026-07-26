@@ -11,9 +11,10 @@ run through a local Qwen3-8B model instead of the paper's GPT4All/Llama 3
 setup.
 
 Requires:
-- models/Qwen3-8B-4bit-mlx (downloaded from mlx-community/Qwen3-8B-4bit)
 - The D3 example dataset (reference-repo/data/assets_example/metadata.json
   and targets.json)
+- models/Qwen3-8B-4bit-mlx, downloaded automatically on first run if it's
+  not already there (~4.4GB, so first run on a new machine takes a while)
 """
 
 import json
@@ -25,6 +26,7 @@ from mlx_lm import generate, load
 from mlx_lm.tokenizer_utils import TokenizerWrapper
 from matching import match_topic, canonicalize
 
+HF_REPO = "mlx-community/Qwen3-8B-4bit"
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "Qwen3-8B-4bit-mlx")
 NUM_SAMPLE_DOCS = 20
 RANDOM_SEED = 42
@@ -35,6 +37,20 @@ DATASET_DIR = os.path.join(
 RESULTS_PATH = os.path.join(
     os.path.dirname(__file__), "..", "results", "experiment_qwen3-8b_1_results.json"
 )
+
+
+def ensure_model_downloaded():
+    """Download the model into models/ if it isn't there yet, so this
+    script can just be run on a fresh laptop without a manual setup step."""
+
+    weights_file = os.path.join(MODEL_PATH, "model.safetensors")
+    if os.path.exists(weights_file):
+        return
+
+    print(f"Model not found at {MODEL_PATH}, downloading {HF_REPO} (~4.4GB) ...")
+    from huggingface_hub import snapshot_download
+    snapshot_download(HF_REPO, local_dir=MODEL_PATH)
+    print("Download complete.")
 
 
 def load_sample_documents(num_docs):
@@ -126,6 +142,8 @@ def classify_answer(raw_answer, vocabulary, ground_truth_subjects):
 
 
 def main():
+    ensure_model_downloaded()
+
     vocabulary = load_vocabulary()
     documents = load_sample_documents(NUM_SAMPLE_DOCS)
 
