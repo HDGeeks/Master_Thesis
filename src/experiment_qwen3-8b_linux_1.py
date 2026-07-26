@@ -47,6 +47,7 @@ def ensure_model_downloaded():
     print(f"Model not found at {GGUF_PATH}, downloading Qwen3-8B-Q4_K_M.gguf (~4.8GB) ...")
     import requests
 
+    os.makedirs(os.path.dirname(GGUF_PATH), exist_ok=True)
     response = requests.get(HF_URL, stream=True)
     response.raise_for_status()
     with open(GGUF_PATH, "wb") as f:
