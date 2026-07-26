@@ -2,16 +2,16 @@
 run locally) on the paper's own zero-shot topic labeling task, and compare
 the paper's original exact-match evaluation against matching.py.
 
-This talks to the Ollama server running on this machine (localhost:11434),
-not a cloud API. The model runs entirely on this laptop's CPU.
+Runs entirely on this machine via mlx-lm (Apple's local inference library,
+Metal-accelerated), no server, no cloud API, no network calls at inference
+time. The model weights live in models/Qwen3-8B-4bit-mlx.
 
 Reproduces the exact 3-turn prompt structure from the paper (Figure 2),
-run through a local Qwen3-8B model via Ollama instead of the paper's
-GPT4All/Llama 3 setup.
+run through a local Qwen3-8B model instead of the paper's GPT4All/Llama 3
+setup.
 
 Requires:
-- Ollama running locally (ollama serve) with the model imported as
-  "qwen3-8b-local" (see models/Modelfile)
+- models/Qwen3-8B-4bit-mlx (downloaded from mlx-community/Qwen3-8B-4bit)
 - The D3 example dataset (reference-repo/data/assets_example/metadata.json
   and targets.json)
 """
@@ -21,10 +21,10 @@ import os
 import random
 import re
 
-import ollama
+from mlx_lm import generate, load
 from matching import match_topic, canonicalize
 
-MODEL_NAME = "qwen3-8b-local"
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "Qwen3-8B-4bit-mlx")
 NUM_SAMPLE_DOCS = 20
 RANDOM_SEED = 42
 
@@ -80,18 +80,21 @@ def strip_thinking(text):
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
 
 
-def run_chat_session(prompts):
+def run_chat_session(model, tokenizer, prompts):
     """Run a genuine multi-turn conversation, same as GPT4All's chat_session:
     each prompt gets a real reply, and the reply is kept in history for the
-    next turn. Only the final reply is the answer we care about."""
+    next turn. Only the final reply is the answer we care about.
+
+    mlx-lm has no persistent chat session object, so we rebuild the full
+    prompt from the message history on every turn, same end result."""
 
     messages = []
     final_reply = None
 
     for prompt in prompts:
         messages.append({"role": "user", "content": prompt})
-        response = ollama.chat(model=MODEL_NAME, messages=messages)
-        raw_reply = response["message"]["content"]
+        chat_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
+        raw_reply = generate(model, tokenizer, prompt=chat_prompt, max_tokens=500, verbose=False)
         final_reply = strip_thinking(raw_reply)
         messages.append({"role": "assistant", "content": raw_reply})
 
@@ -125,6 +128,9 @@ def main():
     vocabulary = load_vocabulary()
     documents = load_sample_documents(NUM_SAMPLE_DOCS)
 
+    print(f"Loading model from {MODEL_PATH} ...")
+    model, tokenizer = load(MODEL_PATH)
+
     results = []
     for i, doc in enumerate(documents, start=1):
         title = doc["title"]
@@ -133,7 +139,7 @@ def main():
         print(f"[{i}/{len(documents)}] {title}")
 
         prompts = build_prompts(title, vocabulary)
-        raw_answer = run_chat_session(prompts)
+        raw_answer = run_chat_session(model, tokenizer, prompts)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
             raw_answer, vocabulary, ground_truth
