@@ -10,3 +10,4 @@ reference-repo/config/config.ini
 __pycache__/
 *.pyc
 .venv/
+models/
