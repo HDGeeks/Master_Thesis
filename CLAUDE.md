@@ -1,6 +1,6 @@
 1. I am a masters student for NLP
 2. I am trying to come up with a thesis expose
-3. I have read BTW2025-122.pdf -- it has been summarized into paper_summary.md, do NOT re-read or re-summarize the PDF
+3. I have read docs/BTW2025-122.pdf -- it has been summarized into docs/paper_summary.md, do NOT re-read or re-summarize the PDF
 4. Do NOT do the same things twice
 5. I am looking into ways to improve this concept from its shortcomings
 6. At first just ideas as bullet points, later we can vet them with feasibility, difficulty etc

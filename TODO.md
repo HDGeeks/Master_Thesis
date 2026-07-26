@@ -4,7 +4,7 @@
 - Narrowed brainstorm to 10 laptop-feasible, easy-to-medium ideas (no hard/heavy options)
 
 ## Done
-- Read and summarized BTW2025-122.pdf into paper_summary.md
+- Read and summarized docs/BTW2025-122.pdf into docs/paper_summary.md
 - Listed shortcomings of the paper
 - Brainstormed improvement ideas (matching, prompting, ML angles)
 - Reread PDF + summary for accuracy check (confirmed correct)

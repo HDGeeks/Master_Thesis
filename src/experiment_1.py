@@ -28,7 +28,7 @@ RANDOM_SEED = 42
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
-RESULTS_PATH = os.path.join(os.path.dirname(__file__), "..", "experiment_1_results.json")
+RESULTS_PATH = os.path.join(os.path.dirname(__file__), "..", "results", "experiment_1_results.json")
 
 
 def load_sample_documents(num_docs):
