@@ -1,8 +1,11 @@
 .env
 CLAUDE.md
 
-# reference-repo is tracked (code + small dataset json), its own
-# .gitignore inside it handles the venv and the huge raw D3 dump
+# the raw D3 dump reference-repo/data was built from, not needed once
+# metadata.json/targets.json exist
+reference-repo/data/assets_example/d3_papers.jsonl
+reference-repo/data/assets_example/d3_papers.jsonl.gz
+reference-repo/config/config.ini
 
 __pycache__/
 *.pyc
