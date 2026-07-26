@@ -2,6 +2,9 @@
 run locally) on the paper's own zero-shot topic labeling task, and compare
 the paper's original exact-match evaluation against matching.py.
 
+This talks to the Ollama server running on this machine (localhost:11434),
+not a cloud API. The model runs entirely on this laptop's CPU.
+
 Reproduces the exact 3-turn prompt structure from the paper (Figure 2),
 run through a local Qwen3-8B model via Ollama instead of the paper's
 GPT4All/Llama 3 setup.
