@@ -1,4 +1,5 @@
 .env
+CLAUDE.md
 
 # Cloned reference repo has its own separate git history and its own
 # multi-GB dataset download, no need to track it here, it's reproducible
