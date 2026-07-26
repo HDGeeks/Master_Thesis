@@ -1,0 +1,9 @@
+certifi==2024.8.30
+charset-normalizer==3.3.2
+gpt4all==2.8.2
+idna==3.10
+isal==1.7.1
+requests==2.32.3
+tqdm==4.66.5
+typing_extensions==4.12.2
+urllib3==2.2.3

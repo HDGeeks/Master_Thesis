@@ -1,10 +1,8 @@
 .env
 CLAUDE.md
 
-# Cloned reference repo has its own separate git history and its own
-# multi-GB dataset download, no need to track it here, it's reproducible
-# via `git clone https://github.com/paNeises/paper-2025-bigds.git reference-repo`
-reference-repo/
+# reference-repo is tracked (code + small dataset json), its own
+# .gitignore inside it handles the venv and the huge raw D3 dump
 
 __pycache__/
 *.pyc
