@@ -1,0 +1,10 @@
+.env
+
+# Cloned reference repo has its own separate git history and its own
+# multi-GB dataset download, no need to track it here, it's reproducible
+# via `git clone https://github.com/paNeises/paper-2025-bigds.git reference-repo`
+reference-repo/
+
+__pycache__/
+*.pyc
+.venv/
