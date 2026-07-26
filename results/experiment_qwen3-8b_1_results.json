@@ -14,14 +14,14 @@
       "software engineering",
       "bioinformatics"
     ],
-    "raw_answer": "computer systems",
+    "raw_answer": "software engineering",
     "old_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "software engineering"
     },
     "new_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "software engineering"
     }
   },
   {
@@ -57,14 +57,14 @@
       "robotics",
       "bioinformatics"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "information retrieval",
     "old_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     },
     "new_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     }
   },
   {
@@ -74,14 +74,14 @@
       "computer networks",
       "computer systems"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "computer systems",
     "old_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "success",
+      "topic": "computer systems"
     },
     "new_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "success",
+      "topic": "computer systems"
     }
   },
   {
@@ -113,14 +113,14 @@
       "computer networks",
       "computer systems"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "computer networks",
     "old_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "success",
+      "topic": "computer networks"
     },
     "new_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "success",
+      "topic": "computer networks"
     }
   },
   {
@@ -153,14 +153,14 @@
       "human computer interaction",
       "information retrieval"
     ],
-    "raw_answer": "computer systems",
+    "raw_answer": "computer imaging and vision",
     "old_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "computer imaging and vision"
     },
     "new_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "computer imaging and vision"
     }
   },
   {
@@ -171,7 +171,7 @@
       "human computer interaction",
       "software"
     ],
-    "raw_answer": "computer networks",
+    "raw_answer": "Computer networks",
     "old_matching": {
       "category": "misclassified",
       "topic": "computer networks"
@@ -189,14 +189,14 @@
       "computer networks",
       "computer systems"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "information retrieval",
     "old_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     },
     "new_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     }
   },
   {
@@ -208,14 +208,14 @@
       "computer networks",
       "computer systems"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "information retrieval",
     "old_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     },
     "new_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     }
   },
   {
@@ -229,7 +229,7 @@
       "software engineering",
       "theoretical computer science"
     ],
-    "raw_answer": "theoretical computer science",
+    "raw_answer": "Theoretical computer science",
     "old_matching": {
       "category": "success",
       "topic": "theoretical computer science"
@@ -246,14 +246,14 @@
       "artificial intelligence",
       "computer systems"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "machine learning",
     "old_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "hallucination",
+      "topic": null
     },
     "new_matching": {
-      "category": "misclassified",
-      "topic": "information technology"
+      "category": "hallucination",
+      "topic": null
     }
   },
   {
@@ -267,14 +267,14 @@
       "computer security",
       "computer systems"
     ],
-    "raw_answer": "computer systems",
+    "raw_answer": "computer networks",
     "old_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "computer networks"
     },
     "new_matching": {
       "category": "success",
-      "topic": "computer systems"
+      "topic": "computer networks"
     }
   },
   {
@@ -304,14 +304,14 @@
       "computer imaging and vision",
       "robotics"
     ],
-    "raw_answer": "computer systems",
+    "raw_answer": "robotics",
     "old_matching": {
-      "category": "misclassified",
-      "topic": "computer systems"
+      "category": "success",
+      "topic": "robotics"
     },
     "new_matching": {
-      "category": "misclassified",
-      "topic": "computer systems"
+      "category": "success",
+      "topic": "robotics"
     }
   },
   {
@@ -323,14 +323,14 @@
       "internet",
       "theoretical computer science"
     ],
-    "raw_answer": "information technology",
+    "raw_answer": "information retrieval",
     "old_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     },
     "new_matching": {
       "category": "misclassified",
-      "topic": "information technology"
+      "topic": "information retrieval"
     }
   },
   {

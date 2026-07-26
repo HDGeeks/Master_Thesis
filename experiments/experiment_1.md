@@ -49,6 +49,45 @@ Meeting 1's concrete plan starts with manually checking response quality from ne
 - Downloaded and filtered the full D3 papers dataset down to those exact 2500 documents (`reference-repo/data/assets_example/metadata.json`, `targets.json`), so ground truth CSO subjects are real, not guessed
 - Built `src/experiment_haiku_1.py`: reproduces the paper's exact 3-turn prompt (Figure 2) as a genuine multi-turn conversation (each prompt gets a real reply, replies stay in context for the next prompt, matching how the paper's GPT4All chat session worked), run against the Claude API, model `claude-haiku-4-5-20251001`. Scores every answer both the old way (exact match only) and the new way (matching.py), so the two fixes can be evaluated on the same run
 
+### Part 2 result: Claude Haiku, manual (20 docs)
+
+Decided against paying for API access. Instead ran the 3-turn prompt manually (acting as the model directly in conversation) on 20 sampled documents (seed 42), same documents `experiment_haiku_1.py` would sample.
+
+Result: **19/20 success (95%), 1/20 misclassified, 0 hallucination.** Old vs new matching identical, all answers were clean valid vocabulary strings, no quotes, no near-misses, so this run didn't actually exercise the fuzzy-match fix.
+
+Caveat: not a blind test, the ground truth was visible in this conversation while answering, and there's conscious effort involved that a raw batched API call wouldn't have. Treat this as an upper bound, not a realistic zero-shot number.
+
+## Part 3: Local inference setup (Qwen3-8B)
+
+Wanted a second, fully local "newer model" for the same quality check, no API cost. Took three attempts to get working inference:
+
+1. **`llama-cpp-python`** (first choice, reuses GGUF, has grammar support for later idea 9): failed to build, this Mac's Xcode Command Line Tools are missing C++ standard headers entirely (`<array>`, `<cstdint>` not found even in a bare `clang++` test), a broken system toolchain, not fixable without a `sudo` CLT reinstall.
+2. **Ollama** (prebuilt binary, no compiling): worked, but `ollama ps` revealed it was running 100% on CPU despite this being an Apple M4 with a capable GPU. Homebrew's `ollama` formula bottle doesn't have Metal compiled in (confirmed via `otool -L`, no Metal.framework linkage).
+3. **`mlx-lm`** (Apple's own framework, pure pip install, Metal-accelerated, no compilation at all): this is what's actually used. Needed a different model format than GGUF, downloaded `mlx-community/Qwen3-8B-4bit` (4.6GB) into `models/Qwen3-8B-4bit-mlx/` directly via curl after `huggingface_hub`'s built-in `snapshot_download` stalled for an unclear reason.
+
+Built `src/experiment_qwen3-8b_1.py`, mirroring `experiment_haiku_1.py`'s structure, plus `ensure_model_downloaded()` so the script auto-downloads the model on a fresh machine if it's missing, no manual setup step needed.
+
+### Part 3 result: Qwen3-8B local, first version (3-turn prompt, same as Claude run)
+
+Bug found on the first real run: Qwen3's default "thinking" mode produced a `<think>` reasoning block that got cut off by the `max_tokens=500` cap before closing. The original `strip_thinking()` only stripped *closed* `<think>...</think>` pairs, so the entire unclosed reasoning blob became "the answer," got comma-split, and one fragment coincidentally fuzzy-matched a real topic, producing a false "success" that had nothing to do with the model's actual intent. Fixed two ways: disabled thinking mode via `enable_thinking=False` in `apply_chat_template`, and made `strip_thinking()` return an empty string (not the raw blob) when `<think>` appears without a closing tag.
+
+Result after the fix: **40% success, 60% misclassified, 0% hallucination.** Old vs new matching identical (clean output, nothing for the fuzzy fix to catch). Notable pattern: answered "information technology" 8/20 times, wrong every single time, looks like a generic fallback default rather than reasoned answers, similar in spirit to the paper's own "computer science" fallback, just landing on a real vocabulary term instead of an invalid one.
+
+### Part 3 result: Qwen3-8B local, single-prompt version (final)
+
+The 3-turn structure means 3 model calls per document for only 1 scored answer, wasteful at the 2500-document scale this is headed for on a separate machine. Collapsed the 3 turns into a single combined prompt, 1 model call per title instead of 3 (`build_prompt()` + `ask_model()`, replacing `build_prompts()` + `run_chat_session()`).
+
+Result: **55% success, 40% misclassified, 5% hallucination.** First genuine hallucination observed: "Blind Domain Adaptation: An RKHS Approach" answered "machine learning", not one of the 19 topics, correctly caught as hallucination by both matching versions. Old vs new matching still identical. The generic-fallback pattern persisted but shifted label, from "information technology" to "information retrieval" (5/20 uses, right once).
+
+### Results comparison
+
+| Run | Success | Misclassified | Hallucination |
+|---|---|---|---|
+| Paper (Llama 3 8B, titles, 2500 docs, 5 runs) | 50% | 25% | 25% |
+| Claude Haiku, manual, 20 docs (not blind) | 95% | 5% | 0% |
+| Qwen3-8B local, 3-turn, 20 docs | 40% | 60% | 0% |
+| Qwen3-8B local, single-prompt, 20 docs | 55% | 40% | 5% |
+
 ### Status
 
-Not run yet. Running it as a script needs a separate Anthropic API key (console.anthropic.com, billing separate from the claude.ai chat subscription). Decision pending: pay for a small amount of API credit, or run a handful of documents manually through chat instead (same prompts, no script, no cost, not batchable).
+20-document runs done for both Claude Haiku and Qwen3-8B (local, single-prompt). Next: run the single-prompt version on the full 2500-document dataset on a separate, faster machine (planned as a one-shot run, not repeated). `ensure_model_downloaded()` makes the script portable to that machine without manual setup.
