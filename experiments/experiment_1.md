@@ -47,7 +47,7 @@ Meeting 1's concrete plan starts with manually checking response quality from ne
 
 - Cloned the paper's official reference-repo (`https://github.com/paNeises/paper-2025-bigds`) for the exact prompt wording, the matching code being improved on, and the reproducible list of the 2500 D3 paper IDs used in the paper
 - Downloaded and filtered the full D3 papers dataset down to those exact 2500 documents (`reference-repo/data/assets_example/metadata.json`, `targets.json`), so ground truth CSO subjects are real, not guessed
-- Built `src/experiment_1.py`: reproduces the paper's exact 3-turn prompt (Figure 2) as a genuine multi-turn conversation (each prompt gets a real reply, replies stay in context for the next prompt, matching how the paper's GPT4All chat session worked), run against the Claude API, model `claude-haiku-4-5-20251001`. Scores every answer both the old way (exact match only) and the new way (matching.py), so the two fixes can be evaluated on the same run
+- Built `src/experiment_haiku_1.py`: reproduces the paper's exact 3-turn prompt (Figure 2) as a genuine multi-turn conversation (each prompt gets a real reply, replies stay in context for the next prompt, matching how the paper's GPT4All chat session worked), run against the Claude API, model `claude-haiku-4-5-20251001`. Scores every answer both the old way (exact match only) and the new way (matching.py), so the two fixes can be evaluated on the same run
 
 ### Status
 
