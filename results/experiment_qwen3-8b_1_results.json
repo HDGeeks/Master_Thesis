@@ -392,5 +392,3540 @@
       "category": "misclassified",
       "topic": "information technology"
     }
+  },
+  {
+    "D3 ID": 14217884,
+    "title": "A reversible and multiple-layer embedding strategy with high capacity",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 232061683,
+    "title": "Enhanced Classification Method for Homograph Attack Detection",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "Computer security",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer security"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer security"
+    }
+  },
+  {
+    "D3 ID": 53086647,
+    "title": "Live Demonstration: 4K100p HEVC Intra Encoder",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "internet",
+      "robotics",
+      "software"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 15161475,
+    "title": "Space Speedup and Its Relationship with Time Speedup",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 123431347,
+    "title": "LexBFS based recognition algorithms for cographs and related families",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "theoretical computer science"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 246692766,
+    "title": "EC-ECC: Accelerating Elliptic Curve Cryptography for Edge Computing on Embedded GPU TX2",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer aided design",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "Computer security",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer security"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer security"
+    }
+  },
+  {
+    "D3 ID": 18101612,
+    "title": "Multicriteria meta-heuristics for AGV dispatching control based on computational intelligence",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "robotics",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computational intelligence",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 308884,
+    "title": "Exponential algorithmic speedup by a quantum walk",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "software"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 10828467,
+    "title": "Finite symmetric trilinear integral transform of distributions. Part II",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer security",
+      "computer systems"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 53294072,
+    "title": "Impact of Knowledge Management on Innovation: Evidence from a South Asian Country",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "information technology",
+      "internet",
+      "bioinformatics"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 30330758,
+    "title": "Constructing a Linear Network Code for Multicast Networks Based on Hypergraphs",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 18092796,
+    "title": "CHORUS Distributed Operating System",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "information technology",
+      "operating systems"
+    ],
+    "raw_answer": "operating systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "operating systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "operating systems"
+    }
+  },
+  {
+    "D3 ID": 10458170,
+    "title": "The (in)effectiveness of animation in instruction",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer systems",
+      "data mining",
+      "information retrieval"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 14919800,
+    "title": "Using Online Social Networking to Enhance Social Connectedness and Social Support for the Elderly",
+    "ground_truth_subjects": [
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 29506418,
+    "title": "Bit-error probability for optimum combining of binary signals in the presence of interference and noise",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information theory",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 6607156,
+    "title": "Trajectory-based ball detection and tracking with aid of homography in broadcast tennis video",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "computer vision",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 6141461,
+    "title": "Projector Calibration using a Markerless Plane",
+    "ground_truth_subjects": [
+      "computer aided design",
+      "computer imaging and vision",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 40408730,
+    "title": "A review of the APL2000 conference",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 6349563,
+    "title": "Nonvisual presentation of graphical user interfaces: contrasting two approaches",
+    "ground_truth_subjects": [
+      "human computer interaction",
+      "operating systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 34701515,
+    "title": "A longitudinal study of the effects of a high school robotics and computational thinking class on academic achievement (WIP)",
+    "ground_truth_subjects": [
+      "computer systems",
+      "robotics",
+      "software engineering"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 30758012,
+    "title": "Jacob's Ladder and Scientific Ontologies",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 250071969,
+    "title": "Mathematical modeling of the microtubule detyrosination/tyrosination cycle for cell-based drug screening design",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 17239627,
+    "title": "Industry Cloud - Effective Adoption of Cloud Computing for Industry Solutions",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "information technology",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 2296463,
+    "title": "Time Delay Insensitive Teleoperation",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "robotics",
+      "theoretical computer science"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 190809309,
+    "title": "INSIDDE AR application: Bringing art closer to citizens by promoting the use of smartphones and tablets",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "human computer interaction"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 229703339,
+    "title": "A Survey of Emergency Service Facilities Site Selection (ESFSS) Algorithms",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "information technology",
+      "software",
+      "bioinformatics"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 7867971,
+    "title": "Deformation transfer based on stretchiness ratio",
+    "ground_truth_subjects": [
+      "computer aided design",
+      "computer systems",
+      "human computer interaction",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 40003571,
+    "title": "Anticipated Benefits of Cloud Computing Adoption in Australian Regional Municipal Governments: An Exploratory Study",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "information technology",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 5365933,
+    "title": "An encoder to match Reed-Solomon codes over GF(q) to a subalphabet of GF(q)",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 233434943,
+    "title": "Gain Stabilization Methodology for FinFET Amplifiers Considering Self-Heating Effect",
+    "ground_truth_subjects": [
+      "computer aided design",
+      "computer hardware",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "Computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 19216794,
+    "title": "The rigid body gap filling algorithm",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "human computer interaction",
+      "robotics"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 35332023,
+    "title": "(In)formative play: the effects of digital games on creativity and problem-solving skills",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "human computer interaction"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 239987950,
+    "title": "A Classification System for Visualized Malware Based on Multiple Autoencoder Models",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "operating systems"
+    ],
+    "raw_answer": "computer security",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer security"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer security"
+    }
+  },
+  {
+    "D3 ID": 13517773,
+    "title": "Learning to Look Around: Intelligently Exploring Unseen Environments for Unknown Tasks",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 3953877,
+    "title": "Rapid parameter identification for an electromechanical brake",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 2550780,
+    "title": "Attentive Monitoring of Multiple Video Streams Driven by a Bayesian Foraging Strategy",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer security",
+      "computer systems",
+      "data mining",
+      "internet"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 15403045,
+    "title": "A Content-Based Video Coding Approach for Rigid and Non-Rigid Textures",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "internet"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 18942272,
+    "title": "Control Communication Complexity of Nonlinear Systems",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "information retrieval",
+      "information technology",
+      "internet"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 5450335,
+    "title": "Wind from East: When Will it Blow and How",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "operating systems",
+      "software"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 15610495,
+    "title": "Automating Planning Using Natural Language",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "information retrieval"
+    ],
+    "raw_answer": "Natural Language Processing",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 6519497,
+    "title": "Comparing paedophile activity in different P2P systems",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 149444530,
+    "title": "Intensity-Assisted ICP for Fast Registration of 2D-LIDAR",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "operating systems",
+      "robotics",
+      "theoretical computer science"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 36279913,
+    "title": "Corrosion Analysis in the Electronics Industry of Mexicali Influenced by Atmospheric Factors",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "robotics"
+    ],
+    "raw_answer": "computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 11009620,
+    "title": "Multi-knockout genetic network analysis: the Rad6 example",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 37725425,
+    "title": "Reassessing the documentation paradigm: writing for print and online",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 33572135,
+    "title": "Doing sequence analysis with your printer",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "human computer interaction",
+      "internet",
+      "software"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 14703615,
+    "title": "Introducing deeper nulls and reduction of Side Lobe Levels in a symmetric linear antenna array using genetic algorithm",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "genetic algorithm",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 17358538,
+    "title": "UTACLIR @ CLEF 2002: Towards a Unified Translation Process Model",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "information retrieval",
+      "internet",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 4537717,
+    "title": "Hybrid metabolic network completion",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer programming",
+      "theoretical computer science"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 251773144,
+    "title": "Link State Estimation Under Cyber-Physical Attacks: Theory and Algorithms",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "robotics",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "Computer Networks",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 11721004,
+    "title": "Cross-Lingual SRL Based upon Universal Dependencies",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 228091924,
+    "title": "DLIT: A Scalable Distributed Ledger for IoT Data",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 16157918,
+    "title": "More is Simpler: Effectively and Efficiently Assessing Node-Pair Similarities Based on Hyperlinks",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "human computer interaction",
+      "information retrieval",
+      "internet",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 11046340,
+    "title": "Design and Implementation of Improved Authentication System for Android Smartphone Users",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "robotics"
+    ],
+    "raw_answer": "computer security",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer security"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer security"
+    }
+  },
+  {
+    "D3 ID": 196834559,
+    "title": "Atlas refinement with bounded packing efficiency",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "human computer interaction",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 40324230,
+    "title": "A new dual inverter based solar PV system with maximum power point tracking capability",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 17530710,
+    "title": "Research on connect 6 programming based on MTD(F) and Deeper-Always Transposition Table",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer programming",
+      "human computer interaction",
+      "internet"
+    ],
+    "raw_answer": "computer programming",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer programming"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer programming"
+    }
+  },
+  {
+    "D3 ID": 234753292,
+    "title": "An Approach to Development of Interactive Adaptive Software Tool to Support Data Analysis Activity",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "information retrieval",
+      "internet",
+      "software",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "Software engineering",
+    "old_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    }
+  },
+  {
+    "D3 ID": 15124159,
+    "title": "Interactive playing with large synthetic environments",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "robotics"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 27176611,
+    "title": "An Excel-Based Decision Support System for Supply Chain Design and Management of Biofuels",
+    "ground_truth_subjects": [
+      "artificial intelligence"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 3004339,
+    "title": "Solving video-association problem with explicit evaluation of hypothesis using EDAs",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "human computer interaction",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 15435048,
+    "title": "A Data Parallel Strategy for Haplotype Assembly Problem on Multi-core Computers",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "computer systems",
+      "theoretical computer science",
+      "bioinformatics"
+    ],
+    "raw_answer": "Data mining",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "data mining"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "data mining"
+    }
+  },
+  {
+    "D3 ID": 1680979,
+    "title": "An Approach to Speech Driven Animation",
+    "ground_truth_subjects": [
+      "bioinformatics"
+    ],
+    "raw_answer": "Human computer interaction",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 24482877,
+    "title": "SFCscoreRF: A Random Forest-Based Scoring Function for Improved Affinity Prediction of Protein-Ligand Complexes",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "software engineering"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 46898018,
+    "title": "Kinact: a computational approach for predicting activating missense mutations in protein kinases",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "internet",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 17432632,
+    "title": "Understanding Variation in Transcription Factor Binding by Modeling Transcription Factor Genome-Epigenome Interactions",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "internet",
+      "bioinformatics"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "success",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 3707451,
+    "title": "An event-based access control for IoT",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 14800640,
+    "title": "Using monte-carlo simulation for automatic new topic identification of search engine transaction logs",
+    "ground_truth_subjects": [
+      "computer security",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 236521130,
+    "title": "A Study on the Range Equation Modeling for Multichannel Medium-Earth-Orbit SAR-GMTI Systems",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 24007318,
+    "title": "Application supercomputing and multiscale simulation techniques",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "computer systems",
+      "information technology",
+      "software engineering"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 14829267,
+    "title": "Multi-robot surveillance: An improved algorithm for the GRAPH-CLEAR problem",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer security",
+      "computer systems",
+      "robotics"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 213365780,
+    "title": "Breaking Silos to Guarantee Control Stability with Communication over Ethernet TSN",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 45445994,
+    "title": "Iterative reconstruction-reprojection in projection space",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "software engineering"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 189861861,
+    "title": "Melting Temperature Estimation of Imidazole Ionic Liquids with Clustering Methods",
+    "ground_truth_subjects": [
+      "data mining",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 9045361,
+    "title": "Propositional logics of programs: systems, models, and complexity",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "software engineering"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 17247350,
+    "title": "Efficient video coding integrating MPEG-2 and picture-rate conversion",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "internet"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 16205833,
+    "title": "Multi-camera Scheduling for Video Production",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "internet",
+      "bioinformatics"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 235580756,
+    "title": "Efficient Fast Algorithm and Parallel Hardware Architecture for Intra Prediction of AVS3",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "internet",
+      "software"
+    ],
+    "raw_answer": "computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 231617837,
+    "title": "Emulating Low Probability of Detection Algorithms",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "software"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 17082664,
+    "title": "Towards information transparency in the context of service management",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "information technology",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 245218695,
+    "title": "CODER: An efficient framework for improving retrieval through COntextualized Document Embedding Reranking",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 54503644,
+    "title": "Program comprehension through the identification of abstract data types",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer programming",
+      "computer systems",
+      "software",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "software engineering",
+    "old_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    }
+  },
+  {
+    "D3 ID": 244946572,
+    "title": "Deep Learning in Automatic Fingerprint Identification",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer security",
+      "computer systems",
+      "information retrieval",
+      "software"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 46328578,
+    "title": "From the Editor in Chief: The Search for Jim, and the Search for Altruism",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "information technology",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 35361329,
+    "title": "Computer-Assisted Analysis of Music in George Perle's System of Twelve-Tone Tonality",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "computer systems",
+      "data mining",
+      "human computer interaction",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 15087441,
+    "title": "Computing with CORGIS: Diverse, Real-world Datasets for Introductory Computing",
+    "ground_truth_subjects": [
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 8716024,
+    "title": "Constructing IT and Professional Identity: Introducing Mobile Informatics in Home Care",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "information technology",
+      "bioinformatics"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 219882883,
+    "title": "Narrowband Radar Automatic Target Recognition Based on a Hierarchical Fusing Network With Multidomain Features",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer security",
+      "computer systems"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 211519646,
+    "title": "Reactive Signal Obfuscation with Time-Fracturing to Counter Information Leakage in FPGAs",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "operating systems",
+      "software engineering"
+    ],
+    "raw_answer": "information security",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 6003180,
+    "title": "Modeling and Analysis of Image Dependence and Its Implications for Energy Savings in Error Tolerant Image Processing",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer aided design",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "information retrieval",
+      "internet",
+      "software engineering",
+      "bioinformatics"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 2584338,
+    "title": "Information systems professionals and conflict of interest",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "information retrieval",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 7075858,
+    "title": "MinuteAid: multimedia note-taking in an intelligent meeting room",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "human computer interaction",
+      "information retrieval",
+      "internet",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 10199821,
+    "title": "WILI - Web Interface for people with Lowvision Issues",
+    "ground_truth_subjects": [
+      "computer programming",
+      "human computer interaction",
+      "information technology",
+      "internet"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 10845877,
+    "title": "Robust model selection decision-making using a fuzzy supervisory Approach",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "internet",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 53229095,
+    "title": "A Self-Calibration Method of Linear-Array CCD with Asynchronous Image for Optical Satellite",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer aided design",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "software"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 248407257,
+    "title": "A Convolutional Wasserstein Distance for Tractography Evaluation: Complementarity Study to State-of-the-Art Measures",
+    "ground_truth_subjects": [
+      "computer imaging and vision"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 3493722,
+    "title": "Proxy visible re-encryption scheme with application to e-mail forwarding",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer security",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information security",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 41520594,
+    "title": "Decompositions and Extremal Type II Codes over Z4",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 40859470,
+    "title": "A Link Removal Methodology for Application-Specific Networks-on-Chip on FPGAs",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 248249938,
+    "title": "K-Means Clustering with Fairness Constraints",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "data mining"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 201847486,
+    "title": "A Survey on Handover Management: From LTE to NR",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "human computer interaction"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 226295907,
+    "title": "LitCovid: an open database of COVID-19 literature",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 16494301,
+    "title": "Authorship Attribution Based on Specific Vocabulary",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 233714764,
+    "title": "Semantic Modeling for Food Recommendation Explanations",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "information retrieval",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 561823,
+    "title": "Compressed domain texture based visual information retrieval method for I-frame coded pictures",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 7309462,
+    "title": "Model-driven, Semantic Service Integration using COSMO Framework",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 230486449,
+    "title": "Categorizing Smells: A Localist Approach",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "human computer interaction",
+      "robotics",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 17344245,
+    "title": "When Counting is Not Enough: Limitations of NSA's Effectiveness Assessment of Surveillance Technology",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "information technology"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 19248458,
+    "title": "Algorithm of navigation for a mobile robot",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "robotics",
+      "software"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 59688923,
+    "title": "Design and verification of information systems",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer programming",
+      "computer systems",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information systems",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 10667603,
+    "title": "Project DOC: Its Methodological Basis",
+    "ground_truth_subjects": [
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 149941626,
+    "title": "The relationship of personal innovativeness, quality of digital resources and generic usability with users' satisfaction",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "human computer interaction",
+      "information retrieval",
+      "information technology",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "success",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 149697,
+    "title": "MPPs versus Clusters",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "software"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 17091704,
+    "title": "Checking C++ Programs for Dimensional Consistency",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "software engineering"
+    ],
+    "raw_answer": "computer programming",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer programming"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer programming"
+    }
+  },
+  {
+    "D3 ID": 214596196,
+    "title": "Scalable Performance Awareness for In Situ Scientific Applications",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "data mining",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 12554543,
+    "title": "Providing A Data Location Assurance Service for Cloud Storage Environments",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 219048178,
+    "title": "Energy- and Time-Aware Data Acquisition for Mobile Robots Using Mixed Cognition Particle Swarm Optimization",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "robotics"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 6839519,
+    "title": "An Integrated Control of Differential Braking, Front/Rear Traction, and Active Roll Moment for Limit Handling Performance",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 20141087,
+    "title": "Generalized born model with a simple smoothing function",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 251751618,
+    "title": "Comparison of Particle Swarm Optimization and Genetic Algorithm for Ultrasound Estimation of Carotid Intima-Media Thickness Using Matching Pursuit",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "bioinformatics"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 38632966,
+    "title": "A 220nW neural amplifier for multi-channel neural recording systems",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 10979032,
+    "title": "A Signal Detection Circuit for 8b/10b 2.5 Gb/s Serial Data Communication System in 90 nm CMOS",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer systems"
+    ],
+    "raw_answer": "computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 231648399,
+    "title": "On the Non-Monotonicity of a Non-Differentially Mismeasured Binary Confounder",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 226433043,
+    "title": "Exploiting Antenna Diversity to Enhance Hybrid Cooperative Non-Orthogonal Multiple Access",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 46771,
+    "title": "Parameterisation of layover detector for urban analysis in InSAR data",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 248849415,
+    "title": "Network Slicing for Wireless Networks Operating in a Shared Spectrum Environment",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 27147211,
+    "title": "BrickNet: sharing object behaviors on the Net",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "human computer interaction"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 209460604,
+    "title": "Introducing the Robot Vulnerability Database (RVD)",
+    "ground_truth_subjects": [
+      "computer security",
+      "computer systems",
+      "data mining",
+      "robotics",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 954852,
+    "title": "Linearizing CMOS Switching Power Amplifiers Using Supply Regulators",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 7184120,
+    "title": "Partial differential equation boundary control of a flexible manipulator with input saturation",
+    "ground_truth_subjects": [
+      "computer systems",
+      "robotics"
+    ],
+    "raw_answer": "control systems",
+    "old_matching": {
+      "category": "hallucination",
+      "topic": null
+    },
+    "new_matching": {
+      "category": "hallucination",
+      "topic": null
+    }
+  },
+  {
+    "D3 ID": 35843508,
+    "title": "Fuzzy Sets, Fuzzy Logic, Applications",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "theoretical computer science"
+    ],
+    "raw_answer": "Theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 22078622,
+    "title": "Interactive SIGHT demo: textual summaries of simple bar charts",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer security",
+      "computer systems",
+      "data mining",
+      "information retrieval"
+    ],
+    "raw_answer": "Human computer interaction",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 15836324,
+    "title": "Similarity-based retrieval of temporal documents",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 3096656,
+    "title": "Interval-based localization for mobile sensors in low-anchors density networks",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "software",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 15942854,
+    "title": "Development of a holonomic mobile spherical robot with 3D center of gravity shifting actuators",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "robotics"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 5823574,
+    "title": "Blind channel estimation for multiple input multiple output uplink guard-band assisted code division multiple access systems with layered space frequency equalisation",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems",
+      "software engineering"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 208617466,
+    "title": "Learning to Dynamically Coordinate Multi-Robot Teams in Graph Attention Networks",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "human computer interaction",
+      "robotics",
+      "theoretical computer science"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 3934009,
+    "title": "A magnetoelectronic register file cell for a self\u2010checkpointing microprocessor",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "operating systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 227123417,
+    "title": "Real-time Road Cracks Detection based on Improved Deep Convolutional Neural Network",
+    "ground_truth_subjects": [
+      "artificial intelligence"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 7965671,
+    "title": "Why significant UML change is unlikely",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "software",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "software engineering",
+    "old_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    }
+  },
+  {
+    "D3 ID": 8120805,
+    "title": "Prosodic cycles and interpersonal synchrony in American English and Swedish",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer programming",
+      "human computer interaction"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 206476436,
+    "title": "A distributed implementation of fuzzy clustering and switching of linear regression models for lossless compression of imagery and 3D data",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "human computer interaction",
+      "software"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 233136189,
+    "title": "Evaluation of Power-Assisted Cart Based on Inherently Safe Control\u2736",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "robotics"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 11142838,
+    "title": "MLLR/MAP adaptation using pronunciation variation for non-native speech recognition",
+    "ground_truth_subjects": [
+      "computer systems"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 17277069,
+    "title": "Immobilization-Based Control of Spider-Like Robots in Tunnel Environments",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer systems",
+      "information technology",
+      "internet",
+      "robotics"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 226264016,
+    "title": "Anu Question Answering System",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "Information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 251043472,
+    "title": "Frequent Itemset Generation Using Association Rule Mining Based on Hybrid Neural Network Based Billiard Inspired Optimization",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "internet"
+    ],
+    "raw_answer": "Information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 53436752,
+    "title": "On the relationship between satisfiability and partially observable Markov decision processes",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer programming",
+      "computer systems",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 14823064,
+    "title": "A Bayesian Filter Approach to Modelling Human Movement Patterns for First Responders within Indoor Locations",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 231632194,
+    "title": "DFOGraph: an I/O- and communication-efficient system for distributed fully-out-of-core graph processing",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer security",
+      "internet"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 14280277,
+    "title": "Design of QoS-aware Provisioning Systems",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 23259286,
+    "title": "Theoretical Analysis of M-ary/SS Communication Systems Using Racing Counter and a Hadamard Matrix",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "operating systems"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 46294782,
+    "title": "Developing graph-based co-scheduling algorithms with GPU acceleration",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "operating systems",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 38507129,
+    "title": "Rejection of multiple narrow-band interference in both BPSK and QPSK DS spread-spectrum systems",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 65375197,
+    "title": "Bringing models to the domain: deploying Gaussian processes in the biological sciences",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 221384948,
+    "title": "Safety of a High-Efficiency Electrical Fence Energizer",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "theoretical computer science"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 142503639,
+    "title": "Ask toscanini!: architecting a search engine for music scores beyond metadata",
+    "ground_truth_subjects": [
+      "internet",
+      "software",
+      "software engineering",
+      "bioinformatics"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 7603817,
+    "title": "Iterative feedforward control: a closed-loop identification problem and a solution",
+    "ground_truth_subjects": [
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 16278193,
+    "title": "Preservation Digitization of David Edelberg's Handel LP Collection: A Pilot Project",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "computer security",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 15279122,
+    "title": "NeuroBlocks \u2013 Visual Tracking of Segmentation and Proofreading for Large Connectomics Projects",
+    "ground_truth_subjects": [
+      "computer imaging and vision",
+      "human computer interaction",
+      "internet"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 3537377,
+    "title": "Visual Servoing for an Autonomous Hexarotor Using a Neural Network Based PID Controller",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer systems",
+      "robotics",
+      "software"
+    ],
+    "raw_answer": "robotics",
+    "old_matching": {
+      "category": "success",
+      "topic": "robotics"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "robotics"
+    }
+  },
+  {
+    "D3 ID": 30064456,
+    "title": "Generic thermal model of electric appliances integrated in low energy building",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "software"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 1105263,
+    "title": "A Framework for Emergent Emotions, Based on Motivation and Cognitive Modulators",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "human computer interaction",
+      "robotics"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 246477970,
+    "title": "Data Privacy Protection based on Feature Dilution in Cloud Services",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer security",
+      "computer systems",
+      "data mining"
+    ],
+    "raw_answer": "Computer security",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer security"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer security"
+    }
+  },
+  {
+    "D3 ID": 233766159,
+    "title": "Consumer Online Search with Partially Revealed Information",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer aided design",
+      "computer hardware",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "information retrieval",
+      "internet",
+      "software engineering"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 15539328,
+    "title": "Computational Linguistics in Brazil: An Overview",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 246557491,
+    "title": "Single-Channel Selection for EEG-Based Emotion Recognition Using Brain Rhythm Sequencing",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "human computer interaction",
+      "robotics",
+      "bioinformatics"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 349059,
+    "title": "Edge statistics-based image scale ratio and noise strength estimation in DCT-coded images",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "internet"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 4461076,
+    "title": "Towards Open-Set Identity Preserving Face Synthesis",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer security"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 3168177,
+    "title": "Perceptual evaluation of space in virtual environments",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "information retrieval",
+      "software engineering"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 15434201,
+    "title": "Detection of mitotic cells using completed local binary pattern in histopathological images",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "internet",
+      "bioinformatics"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 3802305,
+    "title": "Delay Bounds under Arbitrary Multiplexing: When Network Calculus Leaves You in the Lurch...",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "Computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 1609716,
+    "title": "Retrieving wave spectra energy from synthetic aperture radar of ENVISAT satellite data",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 28285815,
+    "title": "Discrete event simulation in Sasol: petrochemical industry",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 221102175,
+    "title": "SurvivalMeth: a web server to investigate the effect of DNA methylation-related functional elements on prognosis",
+    "ground_truth_subjects": [
+      "computer security",
+      "computer systems",
+      "human computer interaction",
+      "internet"
+    ],
+    "raw_answer": "Bioinformatics",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "bioinformatics"
+    }
+  },
+  {
+    "D3 ID": 15813180,
+    "title": "Spectral estimation algorithm for smart antenna system with modified ULA",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer systems",
+      "software"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 18105572,
+    "title": "An improved neural network for segmenting objects' boundaries in real images",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer security"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 208267499,
+    "title": "Importance Sampling of Many Lights with Reinforcement Lightcuts Learning",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "computer systems",
+      "human computer interaction",
+      "robotics"
+    ],
+    "raw_answer": "Computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 14895324,
+    "title": "Hardware Architecture for Video Authentication Using Sensor Pattern Noise",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "internet",
+      "software"
+    ],
+    "raw_answer": "computer hardware",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer hardware"
+    }
+  },
+  {
+    "D3 ID": 8353048,
+    "title": "Testing polynomials which are easy to compute (Extended Abstract)",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "theoretical computer science"
+    }
   }
 ]

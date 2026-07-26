@@ -29,7 +29,7 @@ from matching import match_topic, canonicalize
 
 HF_REPO = "mlx-community/Qwen3-8B-4bit"
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "Qwen3-8B-4bit-mlx")
-NUM_SAMPLE_DOCS = 20
+NUM_SAMPLE_DOCS = 200
 RANDOM_SEED = 42
 
 DATASET_DIR = os.path.join(
