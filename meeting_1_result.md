@@ -14,5 +14,4 @@
     - Check quality of responses from newer models manually
     - If results are decent, maybe investigate cost optimization, multi labels and low level labels (sub-levels)
     - cost of sub-level concepts
-   
     - If results are not decent, maybe investigate fine tuning or few shot prompts
