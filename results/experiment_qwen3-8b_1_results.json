@@ -1,0 +1,396 @@
+[
+  {
+    "D3 ID": 7158458,
+    "title": "Reducing trace selection footprint for large-scale Java applications without performance loss",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer programming",
+      "computer security",
+      "computer systems",
+      "internet",
+      "operating systems",
+      "software",
+      "software engineering",
+      "bioinformatics"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 1345246,
+    "title": "Comment, sans nuire aux informaticiens, d\u00e9passer l'artifice des Connaissances ? Documents num\u00e9riques, Connaissances et Collections",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "human computer interaction",
+      "information retrieval",
+      "internet"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 17845485,
+    "title": "Breast Tumor Characterization Based on Ultrawideband Microwave Backscatter",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems",
+      "robotics",
+      "bioinformatics"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 16160403,
+    "title": "Adaptive Low-Gain Integral Control of Multivariable Well-Posed Linear Systems",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 15245911,
+    "title": "Multi-camera Based Human Tracking with Non-overlapping Fields of View",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer security",
+      "computer systems",
+      "information retrieval",
+      "robotics"
+    ],
+    "raw_answer": "human computer interaction",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "human computer interaction"
+    }
+  },
+  {
+    "D3 ID": 8801183,
+    "title": "On the capacity and simulation of 3-D MIMO mobile-to-mobile relay fading channels",
+    "ground_truth_subjects": [
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 6637502,
+    "title": "Augmented makeover based on 3D morphable model",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "human computer interaction",
+      "information technology",
+      "internet"
+    ],
+    "raw_answer": "computer imaging and vision",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer imaging and vision"
+    }
+  },
+  {
+    "D3 ID": 232062434,
+    "title": "Device position estimation for Multi-tablet virtual display system",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer imaging and vision",
+      "computer systems",
+      "human computer interaction",
+      "information retrieval"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 5867074,
+    "title": "A Distributed Virtual Reality Simulation System for Situational Training",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "human computer interaction",
+      "software"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 246939568,
+    "title": "Micro Junction Agent: A Scalable Multi-agent Reinforcement Learning Method for Traffic Control",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 53227829,
+    "title": "Polarimetric and Multitemporal Information Extracted from Sentinel-1 Sar Data to Map Buildings",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 1657771,
+    "title": "On Minimal Valid Inequalities for Mixed Integer Conic Programs",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer networks",
+      "computer programming",
+      "computer systems",
+      "software engineering",
+      "theoretical computer science"
+    ],
+    "raw_answer": "theoretical computer science",
+    "old_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "theoretical computer science"
+    }
+  },
+  {
+    "D3 ID": 1542363,
+    "title": "Blind Domain Adaptation: An RKHS Approach",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 6204236,
+    "title": "A configurable RFID sensor tag baseband conforming to IEEE 1451.7 Standard",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer security",
+      "computer systems"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 15045040,
+    "title": "Review of \"The Object Primer, 3rd Edition by Scott W. Ambler\". Cambridge University Press: Cambridge, 2004, 0-521-54018-6 (paperback).",
+    "ground_truth_subjects": [
+      "computer programming",
+      "software",
+      "software engineering"
+    ],
+    "raw_answer": "software engineering",
+    "old_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "software engineering"
+    }
+  },
+  {
+    "D3 ID": 15607419,
+    "title": "Collaborative Multi-vehicle SLAM with moving object tracking",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer imaging and vision",
+      "robotics"
+    ],
+    "raw_answer": "computer systems",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "computer systems"
+    }
+  },
+  {
+    "D3 ID": 216555005,
+    "title": "A Linked Data Representation for Summary Statistics and Grouping Criteria",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "internet",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  },
+  {
+    "D3 ID": 249538351,
+    "title": "Analyzing Folktales of Different Regions Using Topic Modeling and Clustering",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer systems",
+      "data mining",
+      "information retrieval",
+      "bioinformatics"
+    ],
+    "raw_answer": "information retrieval",
+    "old_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "information retrieval"
+    }
+  },
+  {
+    "D3 ID": 1405207,
+    "title": "Codes for network switches",
+    "ground_truth_subjects": [
+      "computer hardware",
+      "computer imaging and vision",
+      "computer networks",
+      "computer programming",
+      "computer systems"
+    ],
+    "raw_answer": "computer networks",
+    "old_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    },
+    "new_matching": {
+      "category": "success",
+      "topic": "computer networks"
+    }
+  },
+  {
+    "D3 ID": 235568494,
+    "title": "DGeye: Probabilistic Risk Perception and Prediction for Urban Dangerous Goods Management",
+    "ground_truth_subjects": [
+      "artificial intelligence",
+      "computer hardware",
+      "computer security",
+      "data mining",
+      "theoretical computer science"
+    ],
+    "raw_answer": "information technology",
+    "old_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    },
+    "new_matching": {
+      "category": "misclassified",
+      "topic": "information technology"
+    }
+  }
+]

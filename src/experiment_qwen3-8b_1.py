@@ -6,9 +6,10 @@ Runs entirely on this machine via mlx-lm (Apple's local inference library,
 Metal-accelerated), no server, no cloud API, no network calls at inference
 time. The model weights live in models/Qwen3-8B-4bit-mlx.
 
-Reproduces the exact 3-turn prompt structure from the paper (Figure 2),
-run through a local Qwen3-8B model instead of the paper's GPT4All/Llama 3
-setup.
+Uses the same content as the paper's 3-turn prompt (Figure 2), combined
+into a single prompt so the model only runs once per title instead of
+three times, the paper split it into 3 turns to manage prompt length for
+their model, we don't need that here.
 
 Requires:
 - The D3 example dataset (reference-repo/data/assets_example/metadata.json
@@ -69,53 +70,47 @@ def load_vocabulary():
     return [canonicalize(t) for t in targets]
 
 
-def build_prompts(title, vocabulary):
+def build_prompt(title, vocabulary):
     targets_string = ", ".join(vocabulary)
 
-    prompt_1 = "We want to create a list of topics in the following. We call this list targets_list."
-    prompt_2 = (
-        "Here are some topics that should be added to the targets_list: "
-        + targets_string
-        + ". Please use the exact spelling that I provide to you."
-    )
-    prompt_3 = (
+    return (
+        "We want to create a list of topics. We call this list targets_list.\n"
+        "Here are the topics in the targets_list: " + targets_string + ". "
+        "Please use the exact spelling that I provide to you.\n"
         "We now want to annotate a title with the topics provided in the targets_list.\n"
         f"Given the following title: {title}\n"
         "Please assign 1 suitable topic from the targets_list to the title.\n"
-        "This topic should be contained in the targets_list we created earlier and use the exact "
+        "This topic should be contained in the targets_list and use the exact "
         "spelling of the topic in the targets_list.\n"
         "Please respond only with the 1 topic without any further text."
     )
-    return [prompt_1, prompt_2, prompt_3]
 
 
 def strip_thinking(text):
     """Qwen3 can emit a <think>...</think> reasoning block before the real
     answer. Strip it, we only want the final answer text, same as the paper
-    only wanted the plain topic string."""
+    only wanted the plain topic string.
+
+    If <think> appears without a closing </think> (generation got cut off
+    mid-thought), there is no real answer to extract. Return an empty
+    string rather than leaking the raw reasoning text into matching, an
+    unclosed block matching a topic by accident is not a real answer."""
+
+    if "<think>" in text and "</think>" not in text:
+        return ""
 
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
 
 
-def run_chat_session(model, tokenizer: TokenizerWrapper, prompts):
-    """Run a genuine multi-turn conversation, same as GPT4All's chat_session:
-    each prompt gets a real reply, and the reply is kept in history for the
-    next turn. Only the final reply is the answer we care about.
+def ask_model(model, tokenizer: TokenizerWrapper, prompt):
+    """Run the model once on a single prompt and return the answer."""
 
-    mlx-lm has no persistent chat session object, so we rebuild the full
-    prompt from the message history on every turn, same end result."""
-
-    messages = []
-    final_reply = None
-
-    for prompt in prompts:
-        messages.append({"role": "user", "content": prompt})
-        chat_prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True)
-        raw_reply = generate(model, tokenizer, prompt=chat_prompt, max_tokens=500, verbose=False)
-        final_reply = strip_thinking(raw_reply)
-        messages.append({"role": "assistant", "content": raw_reply})
-
-    return final_reply
+    messages = [{"role": "user", "content": prompt}]
+    chat_prompt = tokenizer.apply_chat_template(
+        messages, add_generation_prompt=True, enable_thinking=False
+    )
+    raw_reply = generate(model, tokenizer, prompt=chat_prompt, max_tokens=500, verbose=False)
+    return strip_thinking(raw_reply)
 
 
 def classify_answer(raw_answer, vocabulary, ground_truth_subjects):
@@ -157,8 +152,8 @@ def main():
 
         print(f"[{i}/{len(documents)}] {title}")
 
-        prompts = build_prompts(title, vocabulary)
-        raw_answer = run_chat_session(model, tokenizer, prompts)
+        prompt = build_prompt(title, vocabulary)
+        raw_answer = ask_model(model, tokenizer, prompt)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
             raw_answer, vocabulary, ground_truth
