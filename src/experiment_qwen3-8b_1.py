@@ -22,6 +22,7 @@ import random
 import re
 
 from mlx_lm import generate, load
+from mlx_lm.tokenizer_utils import TokenizerWrapper
 from matching import match_topic, canonicalize
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "Qwen3-8B-4bit-mlx")
@@ -80,7 +81,7 @@ def strip_thinking(text):
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
 
 
-def run_chat_session(model, tokenizer, prompts):
+def run_chat_session(model, tokenizer: TokenizerWrapper, prompts):
     """Run a genuine multi-turn conversation, same as GPT4All's chat_session:
     each prompt gets a real reply, and the reply is kept in history for the
     next turn. Only the final reply is the answer we care about.
