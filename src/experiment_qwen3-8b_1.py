@@ -23,8 +23,8 @@ import os
 import random
 import re
 
-from mlx_lm import generate, load
-from mlx_lm.tokenizer_utils import TokenizerWrapper
+from mlx_lm import generate, load # pyright: ignore[reportMissingImports]
+from mlx_lm.tokenizer_utils import TokenizerWrapper # pyright: ignore[reportMissingImports]
 from matching import match_topic, canonicalize
 
 HF_REPO = "mlx-community/Qwen3-8B-4bit"
