@@ -5,7 +5,7 @@ original exact-match evaluation against matching.py.
 Linux/CPU version, for a server-grade machine with no GPU. Uses Ollama
 (CPU backend, multi-threaded) instead of mlx-lm, which is Mac-only. Same
 single-prompt approach as the Mac version (src/experiment_qwen3-8b_1.py),
-1 model call per title.
+1 model call per document.
 
 Requires Ollama installed and running (ollama serve), install with:
     curl -fsSL https://ollama.com/install.sh | sh
@@ -30,11 +30,16 @@ OLLAMA_MODEL_NAME = "qwen3-8b-local"
 NUM_SAMPLE_DOCS = 2500
 RANDOM_SEED = 42
 
+# Which field of each document to feed the model as input.
+# Set to "title" to use only the title, or "abstract" to use only the abstract.
+INPUT_FIELD = "abstract"  # "title" or "abstract"
+
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RESULTS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "results", "experiment_qwen3-8b_linux_1_results.json"
+    os.path.dirname(__file__), "..", "results",
+    f"experiment_qwen3-8b_linux_1_{INPUT_FIELD}_results.json",
 )
 
 
@@ -57,23 +62,17 @@ def ensure_model_downloaded():
 
 
 def ensure_ollama_model_ready():
-    """Import the GGUF into Ollama under OLLAMA_MODEL_NAME, always
-    rebuilding so any change to the PARAMETER lines below actually takes
-    effect. This is safe to re-run: the underlying weights are content
-    addressed, so Ollama reuses the existing blob and this just rewrites
-    the (fast) manifest, not a full re-copy of the ~5GB weights file."""
+    """Import the GGUF into Ollama under OLLAMA_MODEL_NAME if it isn't
+    already imported."""
+
+    existing_models = [m.model for m in ollama.list().models]
+    if any(name.startswith(OLLAMA_MODEL_NAME) for name in existing_models):
+        return
 
     print(f"Importing {GGUF_PATH} into Ollama as {OLLAMA_MODEL_NAME} ...")
     modelfile_path = os.path.join(os.path.dirname(GGUF_PATH), "Modelfile")
     with open(modelfile_path, "w") as f:
         f.write(f"FROM {os.path.basename(GGUF_PATH)}\n")
-        f.write("PARAMETER num_predict 50\n")     # short cap, we only expect a topic name back, no reasoning block
-        f.write("PARAMETER num_thread 16\n")      # matches the machine's 16 logical cores, so this model always runs full-threaded
-        f.write("PARAMETER num_ctx 4096\n")       # context window, generous enough for the full vocabulary list plus a title
-        f.write("PARAMETER temperature 0\n")      # deterministic output, we want consistent topic labeling, not creative variation
-        f.write("PARAMETER seed 42\n")            # same seed as RANDOM_SEED used for document sampling, keeps the whole run reproducible
-        f.write("PARAMETER num_gpu 0\n")          # explicit CPU-only, this machine has no GPU, avoids any accidental partial offload attempt
-        f.write("PARAMETER repeat_penalty 1.1\n")  # mild penalty against repeating tokens, default Ollama value, kept explicit rather than implicit
 
     subprocess.run(
         ["ollama", "create", OLLAMA_MODEL_NAME, "-f", "Modelfile"],
@@ -99,16 +98,22 @@ def load_vocabulary():
     return [canonicalize(t) for t in targets]
 
 
-def build_prompt(title, vocabulary):
+def build_prompt(input_text, vocabulary):
+    """Build the prompt. input_text is whatever field INPUT_FIELD points
+    to (title or abstract), the wording adapts to name that field so the
+    model gets an accurate description of what it is reading."""
+
     targets_string = ", ".join(vocabulary)
+    field_label = INPUT_FIELD  # "title" or "abstract", used directly in the prompt text
 
     return (
         "We want to create a list of topics. We call this list targets_list.\n"
         "Here are the topics in the targets_list: " + targets_string + ". "
         "Please use the exact spelling that I provide to you.\n"
-        "We now want to annotate a title with the topics provided in the targets_list.\n"
-        f"Given the following title: {title}\n"
-        "Please assign 1 suitable topic from the targets_list to the title.\n"
+        f"We now want to annotate a {field_label} with the topics provided in the targets_list.\n"
+        f"Given the following {field_label}: {input_text}\n"
+        "Please assign 1 suitable topic from the targets_list to the "
+        f"{field_label}.\n"
         "This topic should be contained in the targets_list and use the exact "
         "spelling of the topic in the targets_list.\n"
         "Please respond only with the 1 topic without any further text."
@@ -135,7 +140,9 @@ def ask_model(prompt):
         messages=[{"role": "user", "content": prompt}],
         keep_alive="30m",  # keep the model loaded in RAM between the 2500 calls instead of reloading it each time
         think=False,  # same intent as enable_thinking=False in the Mac version, skip the reasoning block since we only want the final topic answer
-        # num_predict, num_thread, num_ctx, and temperature are now baked into the model itself via the Modelfile in ensure_ollama_model_ready(), no need to repeat them here
+        options={
+            "num_predict": 100,  # short cap, the answer is just a topic name (or a few comma-separated candidates), no reasoning block to account for anymore
+        },
     )
     return strip_thinking(response["message"]["content"])
 
@@ -172,12 +179,13 @@ def main():
 
     results = []
     for i, doc in enumerate(documents, start=1):
-        title = doc["title"]
+        # Pull whichever field INPUT_FIELD points to (title or abstract) as the model input.
+        input_text = doc[INPUT_FIELD]
         ground_truth = [canonicalize(s) for s in doc["subjects"]]
 
-        print(f"[{i}/{len(documents)}] {title}")
+        print(f"[{i}/{len(documents)}] {input_text}")
 
-        prompt = build_prompt(title, vocabulary)
+        prompt = build_prompt(input_text, vocabulary)
         raw_answer = ask_model(prompt)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
@@ -190,7 +198,8 @@ def main():
 
         results.append({
             "D3 ID": doc["D3 ID"],
-            "title": title,
+            "input_field": INPUT_FIELD,
+            "input_text": input_text,
             "ground_truth_subjects": ground_truth,
             "raw_answer": raw_answer,
             "old_matching": {"category": old_cat, "topic": old_topic},
