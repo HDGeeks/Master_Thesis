@@ -211,8 +211,10 @@ def main():
             "new_matching": {"category": new_cat, "topic": new_topic},
         })
 
-    with open(RESULTS_PATH, "w") as f:
-        json.dump(results, f, indent=2)
+        # Save after every document, not just at the end, so a crash midway
+        # through the 2500 queries doesn't lose everything done so far.
+        with open(RESULTS_PATH, "w") as f:
+            json.dump(results, f, indent=2)
 
     print(f"\nSaved {len(results)} results to {RESULTS_PATH}")
     print_summary(results)
