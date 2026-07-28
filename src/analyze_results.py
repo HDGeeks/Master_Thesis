@@ -11,6 +11,13 @@ import json
 import random
 
 
+def input_text_of(r):
+    """Older results files have a "title" field, newer ones (that can run
+    on either title or abstract) have "input_text" instead. Handle both."""
+
+    return r["input_text"] if "input_text" in r else r["title"]
+
+
 def print_stats(results):
     print(f"Total documents: {len(results)}\n")
 
@@ -28,7 +35,7 @@ def print_stats(results):
     differing = [r for r in results if r["old_matching"]["category"] != r["new_matching"]["category"]]
     print(f"Cases where the matching fix changed the outcome: {len(differing)}")
     for r in differing:
-        print(f"  {r['title']}")
+        print(f"  {input_text_of(r)}")
         print(f"    raw answer: {r['raw_answer']!r}")
         print(f"    old: {r['old_matching']['category']} -> new: {r['new_matching']['category']}")
 
@@ -39,7 +46,7 @@ def print_sample(results, sample_size, seed):
 
     print(f"\n--- Random sample of {len(sample)} cases ---\n")
     for r in sample:
-        print(f"Title: {r['title']}")
+        print(f"Input: {input_text_of(r)}")
         print(f"  ground truth: {r['ground_truth_subjects']}")
         print(f"  raw answer: {r['raw_answer']!r}")
         print(f"  new matching: {r['new_matching']['category']} ({r['new_matching']['topic']})")

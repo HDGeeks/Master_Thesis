@@ -7,9 +7,11 @@ Metal-accelerated), no server, no cloud API, no network calls at inference
 time. The model weights live in models/Qwen3-8B-4bit-mlx.
 
 Uses the same content as the paper's 3-turn prompt (Figure 2), combined
-into a single prompt so the model only runs once per title instead of
+into a single prompt so the model only runs once per document instead of
 three times, the paper split it into 3 turns to manage prompt length for
 their model, we don't need that here.
+
+Can run on either the title or the abstract, set INPUT_FIELD below.
 
 Requires:
 - The D3 example dataset (reference-repo/data/assets_example/metadata.json
@@ -32,11 +34,16 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "models", "Qwen3-8B-4
 NUM_SAMPLE_DOCS = 2500
 RANDOM_SEED = 42
 
+# Which field of each document to feed the model as input.
+# Set to "title" to use only the title, or "abstract" to use only the abstract.
+INPUT_FIELD = "title"  # "title" or "abstract"
+
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RESULTS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "results", "experiment_qwen3-8b_macos_1_results.json"
+    os.path.dirname(__file__), "..", "results",
+    f"experiment_qwen3-8b_macos_1_{INPUT_FIELD}_results.json",
 )
 
 
@@ -70,16 +77,22 @@ def load_vocabulary():
     return [canonicalize(t) for t in targets]
 
 
-def build_prompt(title, vocabulary):
+def build_prompt(input_text, vocabulary):
+    """Build the prompt. input_text is whatever field INPUT_FIELD points
+    to (title or abstract), the wording adapts to name that field so the
+    model gets an accurate description of what it is reading."""
+
     targets_string = ", ".join(vocabulary)
+    field_label = INPUT_FIELD  # "title" or "abstract", used directly in the prompt text
 
     return (
         "We want to create a list of topics. We call this list targets_list.\n"
         "Here are the topics in the targets_list: " + targets_string + ". "
         "Please use the exact spelling that I provide to you.\n"
-        "We now want to annotate a title with the topics provided in the targets_list.\n"
-        f"Given the following title: {title}\n"
-        "Please assign 1 suitable topic from the targets_list to the title.\n"
+        f"We now want to annotate a {field_label} with the topics provided in the targets_list.\n"
+        f"Given the following {field_label}: {input_text}\n"
+        "Please assign 1 suitable topic from the targets_list to the "
+        f"{field_label}.\n"
         "This topic should be contained in the targets_list and use the exact "
         "spelling of the topic in the targets_list.\n"
         "Please respond only with the 1 topic without any further text."
@@ -147,12 +160,13 @@ def main():
 
     results = []
     for i, doc in enumerate(documents, start=1):
-        title = doc["title"]
+        # Pull whichever field INPUT_FIELD points to (title or abstract) as the model input.
+        input_text = doc[INPUT_FIELD]
         ground_truth = [canonicalize(s) for s in doc["subjects"]]
 
-        print(f"[{i}/{len(documents)}] {title}")
+        print(f"[{i}/{len(documents)}] {input_text}")
 
-        prompt = build_prompt(title, vocabulary)
+        prompt = build_prompt(input_text, vocabulary)
         raw_answer = ask_model(model, tokenizer, prompt)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
@@ -165,7 +179,8 @@ def main():
 
         results.append({
             "D3 ID": doc["D3 ID"],
-            "title": title,
+            "input_field": INPUT_FIELD,
+            "input_text": input_text,
             "ground_truth_subjects": ground_truth,
             "raw_answer": raw_answer,
             "old_matching": {"category": old_cat, "topic": old_topic},

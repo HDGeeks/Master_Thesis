@@ -142,6 +142,9 @@ def ask_model(prompt):
         think=False,  # same intent as enable_thinking=False in the Mac version, skip the reasoning block since we only want the final topic answer
         options={
             "num_predict": 100,  # short cap, the answer is just a topic name (or a few comma-separated candidates), no reasoning block to account for anymore
+            "num_ctx": 4096,  # abstracts run up to ~1700 tokens plus the ~200 token vocab list, default context may be too small and silently truncate
+            "num_thread": os.cpu_count(),  # use all available CPU cores instead of relying on Ollama's auto-detection
+            "num_batch": 1024,  # process more prompt tokens in parallel, speeds up the longer abstract prompts specifically
         },
     )
     return strip_thinking(response["message"]["content"])
