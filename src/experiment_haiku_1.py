@@ -11,6 +11,7 @@ Requires:
   (reference-repo/data/assets_example/metadata.json and targets.json)
 """
 
+import datetime
 import json
 import os
 import random
@@ -28,7 +29,10 @@ RANDOM_SEED = 42
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
-RESULTS_PATH = os.path.join(os.path.dirname(__file__), "..", "results", "experiment_1_results.json")
+RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+RESULTS_PATH = os.path.join(
+    os.path.dirname(__file__), "..", "results", f"experiment_1_{RUN_TIMESTAMP}_results.json"
+)
 
 
 def load_sample_documents(num_docs):

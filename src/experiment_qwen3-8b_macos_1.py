@@ -20,6 +20,7 @@ Requires:
   not already there (~4.4GB, so first run on a new machine takes a while)
 """
 
+import datetime
 import json
 import os
 import random
@@ -41,9 +42,10 @@ INPUT_FIELD = "title"  # "title" or "abstract"
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
+RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 RESULTS_PATH = os.path.join(
     os.path.dirname(__file__), "..", "results",
-    f"experiment_qwen3-8b_macos_1_{INPUT_FIELD}_results.json",
+    f"experiment_qwen3-8b_macos_1_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
 )
 
 

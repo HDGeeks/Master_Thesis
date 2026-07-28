@@ -15,6 +15,7 @@ it isn't there yet, and imports it into Ollama automatically too, so this
 script can just be run on a fresh machine with no manual setup step.
 """
 
+import datetime
 import json
 import os
 import random
@@ -37,9 +38,10 @@ INPUT_FIELD = "abstract"  # "title" or "abstract"
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
+RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 RESULTS_PATH = os.path.join(
     os.path.dirname(__file__), "..", "results",
-    f"experiment_qwen3-8b_linux_2_{INPUT_FIELD}_results.json",
+    f"experiment_qwen3-8b_linux_2_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
 )
 
 
