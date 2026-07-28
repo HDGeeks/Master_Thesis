@@ -36,7 +36,7 @@ DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RESULTS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "results", "experiment_qwen3-8b_1_results.json"
+    os.path.dirname(__file__), "..", "results", "experiment_qwen3-8b_macos_1_results.json"
 )
 
 

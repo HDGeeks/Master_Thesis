@@ -4,7 +4,7 @@ original exact-match evaluation against matching.py.
 
 Linux/CPU version, for a server-grade machine with no GPU. Uses Ollama
 (CPU backend, multi-threaded) instead of mlx-lm, which is Mac-only. Same
-single-prompt approach as the Mac version (src/experiment_qwen3-8b_1.py),
+single-prompt approach as the Mac version (src/experiment_qwen3-8b_macos_1.py),
 1 model call per title.
 
 Requires Ollama installed and running (ollama serve), install with:

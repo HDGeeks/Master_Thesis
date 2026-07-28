@@ -65,7 +65,7 @@ Wanted a second, fully local "newer model" for the same quality check, no API co
 2. **Ollama** (prebuilt binary, no compiling): worked, but `ollama ps` revealed it was running 100% on CPU despite this being an Apple M4 with a capable GPU. Homebrew's `ollama` formula bottle doesn't have Metal compiled in (confirmed via `otool -L`, no Metal.framework linkage).
 3. **`mlx-lm`** (Apple's own framework, pure pip install, Metal-accelerated, no compilation at all): this is what's actually used. Needed a different model format than GGUF, downloaded `mlx-community/Qwen3-8B-4bit` (4.6GB) into `models/Qwen3-8B-4bit-mlx/` directly via curl after `huggingface_hub`'s built-in `snapshot_download` stalled for an unclear reason.
 
-Built `src/experiment_qwen3-8b_1.py`, mirroring `experiment_haiku_1.py`'s structure, plus `ensure_model_downloaded()` so the script auto-downloads the model on a fresh machine if it's missing, no manual setup step needed.
+Built `src/experiment_qwen3-8b_macos_1.py`, mirroring `experiment_haiku_1.py`'s structure, plus `ensure_model_downloaded()` so the script auto-downloads the model on a fresh machine if it's missing, no manual setup step needed.
 
 ### Part 3 result: Qwen3-8B local, first version (3-turn prompt, same as Claude run)
 
@@ -79,6 +79,23 @@ The 3-turn structure means 3 model calls per document for only 1 scored answer, 
 
 Result: **55% success, 40% misclassified, 5% hallucination.** First genuine hallucination observed: "Blind Domain Adaptation: An RKHS Approach" answered "machine learning", not one of the 19 topics, correctly caught as hallucination by both matching versions. Old vs new matching still identical. The generic-fallback pattern persisted but shifted label, from "information technology" to "information retrieval" (5/20 uses, right once).
 
+### Part 3 result: Qwen3-8B, full 2500 documents, titles (Linux/Ollama, single-prompt)
+
+Ran on the separate server-grade machine (no GPU, CPU-only via Ollama, `src/experiment_qwen3-8b_linux_1.py`), same single-prompt approach as the Mac version, once, on all 2500 documents, titles as document representation (same as the paper's first experiment).
+
+Result:
+
+| | Success | Misclassified | Hallucination |
+|---|---|---|---|
+| Old matching | 63.3% | 29.5% | 7.2% |
+| New matching | 66.6% | 30.3% | 3.1% |
+
+Better than the paper's Llama 3 8B (50/25/25) across every category: higher success, similar misclassification, less than a third the hallucination rate.
+
+The matching fix mattered a lot at this scale, not marginal like the 20-doc runs suggested: **103 of 2500 answers (4.1%) changed category**, and all 103 have the identical raw answer `'computer vision'`, a systematic habit of this model, not a one-off. Under old matching all 103 were hallucinations (not one of the 19 topics verbatim). Under new matching: 83 became success, 20 became misclassified, none stayed unresolved. This is the exact near-miss case the paper documented ("computer vision" vs "computer imaging and vision") showing up naturally at scale and being fully recovered.
+
+Built `src/analyze_results.py` (generic, takes any results file as an argument) to compute these stats and pull a random sample of cases for manual reading, reusable for future experiment result files instead of writing a one-off stats script per run.
+
 ### Results comparison
 
 | Run | Success | Misclassified | Hallucination |
@@ -87,7 +104,8 @@ Result: **55% success, 40% misclassified, 5% hallucination.** First genuine hall
 | Claude Haiku, manual, 20 docs (not blind) | 95% | 5% | 0% |
 | Qwen3-8B local, 3-turn, 20 docs | 40% | 60% | 0% |
 | Qwen3-8B local, single-prompt, 20 docs | 55% | 40% | 5% |
+| Qwen3-8B local, single-prompt, 2500 docs (new matching) | 66.6% | 30.3% | 3.1% |
 
 ### Status
 
-20-document runs done for both Claude Haiku and Qwen3-8B (local, single-prompt). Next: run the single-prompt version on the full 2500-document dataset on a separate, faster machine (planned as a one-shot run, not repeated). `ensure_model_downloaded()` makes the script portable to that machine without manual setup.
+Title-based run complete on the full 2500-document dataset. Abstract-based run (the paper's second experiment, same documents but using the abstract instead of the title) is pending, same script and setup, just needs `document_index` swapped from title to abstract.
