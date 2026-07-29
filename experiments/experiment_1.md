@@ -96,16 +96,33 @@ The matching fix mattered a lot at this scale, not marginal like the 20-doc runs
 
 Built `src/analyze_results.py` (generic, takes any results file as an argument) to compute these stats and pull a random sample of cases for manual reading, reusable for future experiment result files instead of writing a one-off stats script per run.
 
+### Part 3 result: Qwen3-8B, full 2500 documents, abstracts (Linux/Ollama, single-prompt)
+
+Same setup as the titles run, `src/experiment_qwen3-8b_linux_2.py`, `INPUT_FIELD = "abstract"` instead of title.
+
+Result:
+
+| | Success | Misclassified | Hallucination |
+|---|---|---|---|
+| Old matching | 61.8% | 29.5% | 8.6% |
+| New matching | 66.3% | 30.5% | 3.2% |
+
+Same "computer vision" pattern as the titles run: 136 of 2500 answers (5.4%) were the literal string `'computer vision'`, all hallucinations under old matching, recovered to 111 success + 25 misclassified under new matching.
+
+Unlike the paper, abstracts did not produce more hallucinations than titles here (8.6% vs 7.2% old matching, roughly the same; 3.2% vs 3.1% new matching, essentially identical). The paper saw a jump from 25% to 33% hallucination going title to abstract. Success and misclassified rates are also both roughly flat between title and abstract for this model, so Qwen3-8B does not reproduce the paper's title-vs-abstract effect at all.
+
 ### Results comparison
 
 | Run | Success | Misclassified | Hallucination |
 |---|---|---|---|
 | Paper (Llama 3 8B, titles, 2500 docs, 5 runs) | 50% | 25% | 25% |
+| Paper (Llama 3 8B, abstracts, 2500 docs, 5 runs) | 50% | 17% | 33% |
 | Claude Haiku, manual, 20 docs (not blind) | 95% | 5% | 0% |
 | Qwen3-8B local, 3-turn, 20 docs | 40% | 60% | 0% |
 | Qwen3-8B local, single-prompt, 20 docs | 55% | 40% | 5% |
-| Qwen3-8B local, single-prompt, 2500 docs (new matching) | 66.6% | 30.3% | 3.1% |
+| Qwen3-8B local, single-prompt, 2500 docs, titles (new matching) | 66.6% | 30.3% | 3.1% |
+| Qwen3-8B local, single-prompt, 2500 docs, abstracts (new matching) | 66.3% | 30.5% | 3.2% |
 
 ### Status
 
-Title-based run complete on the full 2500-document dataset. Abstract-based run (the paper's second experiment, same documents but using the abstract instead of the title) is pending, same script and setup, just needs `document_index` swapped from title to abstract.
+Both title-based and abstract-based runs complete on the full 2500-document dataset, on both old and new matching. Part 2 (newer model quality check) is done for Qwen3-8B. Next: decide the next branch per meeting 1's plan (cost optimization + multi-label + hierarchy, vs few-shot/fine-tuning), informed by these numbers.
