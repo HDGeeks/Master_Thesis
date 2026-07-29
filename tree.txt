@@ -1,0 +1,35 @@
+Fundamentals
+===================================================================================================================================================================================
+
+Hugging Face models are stored for all users on *helmholtz* in the following directories:
+
+*   /localdata/dagstuhl/ai_models/huggingface-full
+*   /localdata/dagstuhl/ai_models/huggingface-selective
+
+`huggingface-full` contains a complete copy of the model repository, whereas `huggingface-selective` contains only explicitly selected individual files. Models from `huggingface-full` are linked to `huggingface-selective`.
+
+Adding a model to huggingface-full
+====================================================================================================================================================================================================================
+
+The Hugging Face CLI is used for downloading models. It can be installed using `uv` (see installation instructions here: [https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)) 
+with the following command:
+
+uv tool install huggingface_hub
+
+The CLI is invoked using the command `hf`. We will now walk through this process on Helmholtz using the 
+"NousResearch/Hermes-3-Llama-3.2-3B" model ([https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B](https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B)) as an example:
+
+cd /localdata/dagstuhl/ai\_models/huggingface-full
+mkdir -p NousResearch/Hermes-3-Llama-3.2-3B
+hf download --local-dir NousResearch/Hermes-3-Llama-3.2-3B NousResearch/Hermes-3-Llama-3.2-3B
+cd ../huggingface-selective
+mkdir NourResearch
+cd NousResearch
+ln -s ../../huggingface-full/NousResearch/Hermes-3-Llama-3.2-3B/ ./
+
+These commands download the model into the folder of the same name under `/localdata/dagstuhl/ai_models/huggingface-full` and create a link to it in the `selective` branch.
+
+Adding a model to huggingface-selective
+=========================================================================================================================================================================================================================
+
+To do this, simply create a folder structure that mirrors the model name on Hugging Face, and then manually download the individual files from the website into this destination.
