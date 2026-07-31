@@ -33,3 +33,10 @@ Adding a model to huggingface-selective
 =========================================================================================================================================================================================================================
 
 To do this, simply create a folder structure that mirrors the model name on Hugging Face, and then manually download the individual files from the website into this destination.
+
+
+mkdir -p /localdata/dagstuhl/ai_models/huggingface-selective/Qwen/Qwen3-8B-GGUF
+cd /localdata/dagstuhl/ai_models/huggingface-selective/Qwen/Qwen3-8B-GGUF
+hf download Qwen/Qwen3-8B-GGUF Qwen3-8B-Q4_K_M.gguf --local-dir .
+# positional args: repo id, then the specific filename inside that repo
+# --local-dir . 
