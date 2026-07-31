@@ -39,7 +39,7 @@ DATASET_DIR = os.path.join(
 RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 RESULTS_PATH = os.path.join(
     os.path.dirname(__file__), "..", "results",
-    f"experiment_qwen3-8b_linux_3_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
+    f"experiment_qwen3-8b_cpp_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
 )
 
 
@@ -56,12 +56,12 @@ def load_model():
 
     return Llama(
         model_path=GGUF_PATH,
-        n_ctx=4096,      # abstracts run up to ~1700 tokens plus the ~200 token vocab list
-        n_threads=12,    # use all available CPU cores instead of relying on auto-detection
-        n_batch=1024,    # process more prompt tokens in parallel, speeds up longer prompts
-        verbose=False,   # suppress llama.cpp's per-call load logging
-    )
-
+        n_ctx=4096,
+        n_threads=20,        # leaves 4 cores free for other users on this shared machine
+        n_threads_batch=20,  # same core count for prompt/batch processing
+        n_batch=1024,
+        verbose=False,
+)
 
 def load_sample_documents(num_docs):
     metadata_path = os.path.join(DATASET_DIR, "metadata.json")
