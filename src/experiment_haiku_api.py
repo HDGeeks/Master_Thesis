@@ -2,8 +2,12 @@
 paper's own zero-shot topic labeling task, and compare the paper's original
 exact-match evaluation against the improved matching in matching.py.
 
-Reproduces the exact 3-turn prompt structure from the paper (Figure 2),
-run through the Anthropic API instead of the local GPT4All/Llama 3 setup.
+Single-prompt approach, 1 API call per document, matching the structure of
+the Qwen3-8B scripts (INPUT_FIELD toggle, incremental save). The original
+version reproduced the paper's exact 3-turn chat_session structure, this
+version drops that reproduction requirement in favor of one call per
+document, which is both cheaper and easier to compare directly against the
+Qwen runs.
 
 Requires:
 - ANTHROPIC_API_KEY environment variable
@@ -23,15 +27,20 @@ from matching import match_topic, canonicalize
 load_dotenv()
 
 MODEL_NAME = "claude-haiku-4-5-20251001"
-NUM_SAMPLE_DOCS = 20
+NUM_SAMPLE_DOCS = 2500
 RANDOM_SEED = 42
+
+# Which field of each document to feed the model as input.
+# Set to "title" to use only the title, or "abstract" to use only the abstract.
+INPUT_FIELD = "abstract"  # "title" or "abstract"
 
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 RESULTS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "results", f"experiment_1_{RUN_TIMESTAMP}_results.json"
+    os.path.dirname(__file__), "..", "results",
+    f"experiment_1_claude_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
 )
 
 
@@ -51,45 +60,37 @@ def load_vocabulary():
     return [canonicalize(t) for t in targets]
 
 
-def build_prompts(title, vocabulary):
-    targets_string = ", ".join(vocabulary)
+def build_prompt(input_text, vocabulary):
+    """Build the prompt. input_text is whatever field INPUT_FIELD points
+    to (title or abstract), the wording adapts to name that field so the
+    model gets an accurate description of what it is reading."""
 
-    prompt_1 = "We want to create a list of topics in the following. We call this list targets_list."
-    prompt_2 = (
-        "Here are some topics that should be added to the targets_list: "
-        + targets_string
-        + ". Please use the exact spelling that I provide to you."
-    )
-    prompt_3 = (
-        "We now want to annotate a title with the topics provided in the targets_list.\n"
-        f"Given the following title: {title}\n"
-        "Please assign 1 suitable topic from the targets_list to the title.\n"
-        "This topic should be contained in the targets_list we created earlier and use the exact "
+    targets_string = ", ".join(vocabulary)
+    field_label = INPUT_FIELD  # "title" or "abstract", used directly in the prompt text
+
+    return (
+        "We want to create a list of topics. We call this list targets_list.\n"
+        "Here are the topics in the targets_list: " + targets_string + ". "
+        "Please use the exact spelling that I provide to you.\n"
+        f"We now want to annotate a {field_label} with the topics provided in the targets_list.\n"
+        f"Given the following {field_label}: {input_text}\n"
+        "Please assign 1 suitable topic from the targets_list to the "
+        f"{field_label}.\n"
+        "This topic should be contained in the targets_list and use the exact "
         "spelling of the topic in the targets_list.\n"
         "Please respond only with the 1 topic without any further text."
     )
-    return [prompt_1, prompt_2, prompt_3]
 
 
-def run_chat_session(client, prompts):
-    """Run a genuine multi-turn conversation, same as GPT4All's chat_session:
-    each prompt gets a real reply, and the reply is kept in history for the
-    next turn. Only the final reply is the answer we care about."""
+def ask_model(client, prompt):
+    """Run the model once on a single prompt and return the answer."""
 
-    messages = []
-    final_reply = None
-
-    for prompt in prompts:
-        messages.append({"role": "user", "content": prompt})
-        response = client.messages.create(
-            model=MODEL_NAME,
-            max_tokens=200,
-            messages=messages,
-        )
-        final_reply = response.content[0].text
-        messages.append({"role": "assistant", "content": final_reply})
-
-    return final_reply
+    response = client.messages.create(
+        model=MODEL_NAME,
+        max_tokens=100,  # short cap, the answer is just a topic name
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return response.content[0].text.strip()
 
 
 def classify_answer(raw_answer, vocabulary, ground_truth_subjects):
@@ -122,13 +123,14 @@ def main():
 
     results = []
     for i, doc in enumerate(documents, start=1):
-        title = doc["title"]
+        # Pull whichever field INPUT_FIELD points to (title or abstract) as the model input.
+        input_text = doc[INPUT_FIELD]
         ground_truth = [canonicalize(s) for s in doc["subjects"]]
 
-        print(f"[{i}/{len(documents)}] {title}")
+        print(f"[{i}/{len(documents)}] {input_text}")
 
-        prompts = build_prompts(title, vocabulary)
-        raw_answer = run_chat_session(client, prompts)
+        prompt = build_prompt(input_text, vocabulary)
+        raw_answer = ask_model(client, prompt)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
             raw_answer, vocabulary, ground_truth
@@ -140,15 +142,18 @@ def main():
 
         results.append({
             "D3 ID": doc["D3 ID"],
-            "title": title,
+            "input_field": INPUT_FIELD,
+            "input_text": input_text,
             "ground_truth_subjects": ground_truth,
             "raw_answer": raw_answer,
             "old_matching": {"category": old_cat, "topic": old_topic},
             "new_matching": {"category": new_cat, "topic": new_topic},
         })
 
-    with open(RESULTS_PATH, "w") as f:
-        json.dump(results, f, indent=2)
+        # Save after every document, not just at the end, so a crash midway
+        # through the run doesn't lose everything done so far.
+        with open(RESULTS_PATH, "w") as f:
+            json.dump(results, f, indent=2)
 
     print(f"\nSaved {len(results)} results to {RESULTS_PATH}")
     print_summary(results)
