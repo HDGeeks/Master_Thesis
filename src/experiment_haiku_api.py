@@ -35,7 +35,7 @@ RANDOM_SEED = 42
 
 # Which field of each document to feed the model as input.
 # Set to "title" to use only the title, or "abstract" to use only the abstract.
-INPUT_FIELD = "abstract"  # "title" or "abstract"
+INPUT_FIELD = "title"  # "title" or "abstract"
 
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
