@@ -9,6 +9,9 @@ version drops that reproduction requirement in favor of one call per
 document, which is both cheaper and easier to compare directly against the
 Qwen runs.
 
+Zero-shot: no extended thinking, no system prompt, no examples, just the
+single instruction prompt and the model's direct answer.
+
 Requires:
 - ANTHROPIC_API_KEY environment variable
 - The D3 example dataset downloaded via the cloned reference repo
@@ -83,11 +86,16 @@ def build_prompt(input_text, vocabulary):
 
 
 def ask_model(client, prompt):
-    """Run the model once on a single prompt and return the answer."""
+    """Run the model once on a single prompt and return the answer.
+
+    Zero-shot, plain single-turn call. No thinking parameter is passed, so
+    extended thinking stays off by default, no reasoning block to strip
+    from the output (unlike the Qwen version, which needs /no_think and
+    strip_thinking for the same effect)."""
 
     response = client.messages.create(
         model=MODEL_NAME,
-        max_tokens=100,  # short cap, the answer is just a topic name
+        max_tokens=100,  # short cap, the answer is just a topic name, no reasoning to account for
         messages=[{"role": "user", "content": prompt}],
     )
     return response.content[0].text.strip()
