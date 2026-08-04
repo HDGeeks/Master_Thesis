@@ -111,6 +111,24 @@ Same "computer vision" pattern as the titles run: 136 of 2500 answers (5.4%) wer
 
 Unlike the paper, abstracts did not produce more hallucinations than titles here (8.6% vs 7.2% old matching, roughly the same; 3.2% vs 3.1% new matching, essentially identical). The paper saw a jump from 25% to 33% hallucination going title to abstract. Success and misclassified rates are also both roughly flat between title and abstract for this model, so Qwen3-8B does not reproduce the paper's title-vs-abstract effect at all.
 
+### Part 4: Full-scale Claude and a second Qwen3-8B run ("cpp" variant)
+
+Two more full 2500-document runs, both title and abstract, from `results/experiment_qwen3-8b_cpp_title_*`, `experiment_qwen3-8b_cpp_abstract_*`, `experiment_1_claude_title_*`, and `experiment_1_claude_cache_abstract_*`. The scripts behind these ("cpp" Qwen3-8B variant, and the full-scale Claude run with prompt caching) weren't built in this session, so implementation details aren't documented here, only the results, read via `src/analyze_results.py`.
+
+Results (new matching):
+
+| Run | Success | Misclassified | Hallucination |
+|---|---|---|---|
+| Qwen3-8B (cpp), titles | 67.5% | 29.8% | 2.8% |
+| Qwen3-8B (cpp), abstracts | 66.5% | 30.3% | 3.2% |
+| Claude, titles | 70.9% | 27.6% | 1.5% |
+| Claude, abstracts | 74.0% | 23.3% | 2.7% |
+
+Two findings:
+
+1. **Hallucination collapses for both newer models, regardless of title or abstract.** Paper: 25% (titles) / 33% (abstracts). Both Qwen3-8B and Claude stay under 4% in every single run. This looks like a model-generation effect, not a title/abstract effect, newer/better instruction-following models just don't produce as much unparseable garbage in the first place.
+2. **Title vs abstract splits in opposite directions per model.** Qwen3-8B is consistent across both this "cpp" run and the earlier `linux_2` run: titles slightly outperform abstracts (67.5% vs 66.5%, matching the earlier 66.6% vs 66.3%), reproducing the paper's own counter-intuitive finding that more context doesn't help this task. Claude does the opposite: abstracts clearly outperform titles (74.0% vs 70.9%). So "does more context help" depends on the model, not a fixed property of the task the way the paper (with a single model) implied.
+
 ### Results comparison
 
 | Run | Success | Misclassified | Hallucination |
@@ -120,9 +138,13 @@ Unlike the paper, abstracts did not produce more hallucinations than titles here
 | Claude Haiku, manual, 20 docs (not blind) | 95% | 5% | 0% |
 | Qwen3-8B local, 3-turn, 20 docs | 40% | 60% | 0% |
 | Qwen3-8B local, single-prompt, 20 docs | 55% | 40% | 5% |
-| Qwen3-8B local, single-prompt, 2500 docs, titles (new matching) | 66.6% | 30.3% | 3.1% |
-| Qwen3-8B local, single-prompt, 2500 docs, abstracts (new matching) | 66.3% | 30.5% | 3.2% |
+| Qwen3-8B local, single-prompt, 2500 docs, titles | 66.6% | 30.3% | 3.1% |
+| Qwen3-8B local, single-prompt, 2500 docs, abstracts | 66.3% | 30.5% | 3.2% |
+| Qwen3-8B (cpp), 2500 docs, titles | 67.5% | 29.8% | 2.8% |
+| Qwen3-8B (cpp), 2500 docs, abstracts | 66.5% | 30.3% | 3.2% |
+| Claude, 2500 docs, titles | 70.9% | 27.6% | 1.5% |
+| Claude, 2500 docs, abstracts | 74.0% | 23.3% | 2.7% |
 
 ### Status
 
-Both title-based and abstract-based runs complete on the full 2500-document dataset, on both old and new matching. Part 2 (newer model quality check) is done for Qwen3-8B. Next: decide the next branch per meeting 1's plan (cost optimization + multi-label + hierarchy, vs few-shot/fine-tuning), informed by these numbers.
+Full 2500-document runs complete for two models (Qwen3-8B, Claude), both title and abstract, both old and new matching. Part 2 (newer model quality check) is done. Next: decide the next branch per meeting 1's plan (cost optimization + multi-label + hierarchy, vs few-shot/fine-tuning), informed by these numbers.
