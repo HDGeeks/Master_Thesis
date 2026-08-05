@@ -128,7 +128,6 @@ Two findings:
 |---|---|---|---|
 | Paper (Llama 3 8B, titles, 2500 docs, 5 runs) | 50% | 25% | 25% |
 | Paper (Llama 3 8B, abstracts, 2500 docs, 5 runs) | 50% | 17% | 33% |
-| Claude Haiku, manual, 20 docs (not blind) | 95% | 5% | 0% |
 | Qwen3-8B local, 3-turn, 20 docs | 40% | 60% | 0% |
 | Qwen3-8B local, single-prompt, 20 docs | 55% | 40% | 5% |
 | Qwen3-8B local, single-prompt, 2500 docs, titles | 66.6% | 30.3% | 3.1% |
