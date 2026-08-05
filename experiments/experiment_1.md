@@ -49,13 +49,6 @@ Meeting 1's concrete plan starts with manually checking response quality from ne
 - Downloaded and filtered the full D3 papers dataset down to those exact 2500 documents (`reference-repo/data/assets_example/metadata.json`, `targets.json`), so ground truth CSO subjects are real, not guessed
 - Built `src/experiment_haiku_1.py`: reproduces the paper's exact 3-turn prompt (Figure 2) as a genuine multi-turn conversation (each prompt gets a real reply, replies stay in context for the next prompt, matching how the paper's GPT4All chat session worked), run against the Claude API, model `claude-haiku-4-5-20251001`. Scores every answer both the old way (exact match only) and the new way (matching.py), so the two fixes can be evaluated on the same run
 
-### Part 2 result: Claude Haiku, manual (20 docs)
-
-Decided against paying for API access. Instead ran the 3-turn prompt manually (acting as the model directly in conversation) on 20 sampled documents (seed 42), same documents `experiment_haiku_1.py` would sample.
-
-Result: **19/20 success (95%), 1/20 misclassified, 0 hallucination.** Old vs new matching identical, all answers were clean valid vocabulary strings, no quotes, no near-misses, so this run didn't actually exercise the fuzzy-match fix.
-
-Caveat: not a blind test, the ground truth was visible in this conversation while answering, and there's conscious effort involved that a raw batched API call wouldn't have. Treat this as an upper bound, not a realistic zero-shot number.
 
 ## Part 3: Local inference setup (Qwen3-8B)
 
