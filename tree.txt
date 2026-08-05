@@ -40,3 +40,10 @@ cd /localdata/dagstuhl/ai_models/huggingface-selective/Qwen/Qwen3-8B-GGUF
 hf download Qwen/Qwen3-8B-GGUF Qwen3-8B-Q4_K_M.gguf --local-dir .
 # positional args: repo id, then the specific filename inside that repo
 # --local-dir . 
+
+
+https://huggingface.co/Qwen/Qwen3.5-27B
+https://huggingface.co/Qwen/Qwen3.5-9B
+https://huggingface.co/Qwen/Qwen3.5-4B
+https://huggingface.co/Qwen/Qwen3.5-2B
+https://huggingface.co/Qwen/Qwen3.5-0.8B
