@@ -110,17 +110,23 @@ def ask_model(model, tokenizer, prompt, max_new_tokens=100):
     # enable_thinking=False turns off Qwen3.5's reasoning mode so the
     # answer comes back directly, matching the short, no-reasoning
     # behavior the "/no_think" flag gave us in the llama.cpp version.
-    input_ids = tokenizer.apply_chat_template(
+    # return_dict=True so this comes back as a BatchEncoding with
+    # input_ids/attention_mask we can unpack into generate(), instead of
+    # a bare tensor (this transformers version does not return a bare
+    # tensor even without return_dict, so extract it explicitly).
+    model_inputs = tokenizer.apply_chat_template(
         messages,
         add_generation_prompt=True,
         enable_thinking=False,
         return_tensors="pt",
+        return_dict=True,
     ).to(model.device)
+    input_ids = model_inputs["input_ids"]
 
     start = time.time()
     with torch.no_grad():  # inference only, saves memory by not tracking gradients
         output_ids = model.generate(
-            input_ids,
+            **model_inputs,
             max_new_tokens=max_new_tokens,  # short cap, the answer is just a topic name
             do_sample=False,                # deterministic output, same call every time for a given input
         )
