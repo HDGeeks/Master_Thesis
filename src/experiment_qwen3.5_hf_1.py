@@ -27,11 +27,13 @@ import json
 import os
 import random
 import re
+import time
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from matching import match_topic, canonicalize
+from metrics import RunMetrics
 
 MODEL_BASE_DIR = "/localdata/dagstuhl/ai_models/huggingface-full/Qwen"
 NUM_SAMPLE_DOCS = 2500
@@ -97,7 +99,9 @@ def strip_thinking(text):
 
 
 def ask_model(model, tokenizer, prompt, max_new_tokens=100):
-    """Run the model once on a single prompt and return the answer."""
+    """Run the model once on a single prompt and return the answer plus
+    per-call metrics: how long it took, how many tokens got generated,
+    and whether generation hit max_new_tokens without a clean stop."""
 
     messages = [{"role": "user", "content": prompt}]
 
@@ -113,18 +117,25 @@ def ask_model(model, tokenizer, prompt, max_new_tokens=100):
         return_tensors="pt",
     ).to(model.device)
 
+    start = time.time()
     with torch.no_grad():  # inference only, saves memory by not tracking gradients
         output_ids = model.generate(
             input_ids,
             max_new_tokens=max_new_tokens,  # short cap, the answer is just a topic name
             do_sample=False,                # deterministic output, same call every time for a given input
         )
+    seconds = time.time() - start
 
     # slice off the input tokens so we only decode the newly generated part
     new_tokens = output_ids[0][input_ids.shape[-1]:]
     raw_text = tokenizer.decode(new_tokens, skip_special_tokens=True)
 
-    return strip_thinking(raw_text)
+    output_token_count = new_tokens.shape[-1]
+    # if generation used up the entire max_new_tokens budget, it was very
+    # likely cut off mid-answer rather than stopping cleanly on its own
+    truncated = output_token_count >= max_new_tokens
+
+    return strip_thinking(raw_text), seconds, output_token_count, truncated
 
 
 def classify_answer(raw_answer, vocabulary, ground_truth_subjects):
@@ -186,8 +197,11 @@ def main():
         f"experiment_{args.model}_hf_{input_field}_{RUN_TIMESTAMP}_results.json",
     )
 
+    metrics = RunMetrics()
+
     # Load the tokenizer and model once, kept in memory for all 2500 calls
     # (one long-lived process, same idea as the llama.cpp version).
+    load_start = time.time()
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
@@ -195,10 +209,12 @@ def main():
         device_map="auto",   # spread across visible GPUs, fall back to CPU if none
     )
     model.eval()  # inference only, disables dropout and similar training-only layers
+    metrics.record_load(time.time() - load_start)
 
     vocabulary = load_vocabulary()
     documents = load_sample_documents(NUM_SAMPLE_DOCS)
 
+    metrics.start_run()
     results = []
     for i, doc in enumerate(documents, start=1):
         # Pull whichever field --field points to (title or abstract) as the model input.
@@ -208,7 +224,8 @@ def main():
         print(f"[{i}/{len(documents)}] {input_text}")
 
         prompt = build_prompt(input_text, vocabulary, input_field)
-        raw_answer = ask_model(model, tokenizer, prompt)
+        raw_answer, seconds, output_tokens, truncated = ask_model(model, tokenizer, prompt)
+        metrics.record_call(seconds, output_tokens, truncated)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
             raw_answer, vocabulary, ground_truth
@@ -236,6 +253,27 @@ def main():
 
     print(f"\nSaved {len(results)} results to {results_path}")
     print_summary(results)
+
+    metrics.print_summary()
+
+    # Metrics live in their own subfolder, separate from the results
+    # files, same filename stem otherwise.
+    metrics_dir = os.path.join(os.path.dirname(__file__), "..", "results", "metrics")
+    os.makedirs(metrics_dir, exist_ok=True)
+    metrics_filename = os.path.basename(results_path).replace("_results.json", "_metrics.json")
+    metrics_path = os.path.join(metrics_dir, metrics_filename)
+
+    # Same timestamp keeps the filenames paired, but embed an explicit
+    # cross-reference too, in case one file ever gets renamed on its own
+    # later (already happened once in this project).
+    metrics_data = metrics.as_dict()
+    metrics_data["results_file"] = os.path.basename(results_path)
+    metrics_data["model"] = args.model
+    metrics_data["input_field"] = input_field
+
+    with open(metrics_path, "w") as f:
+        json.dump(metrics_data, f, indent=2)
+    print(f"Saved run metrics to {metrics_path}")
 
 
 def print_summary(results):
