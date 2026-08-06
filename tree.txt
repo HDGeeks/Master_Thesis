@@ -47,3 +47,8 @@ https://huggingface.co/Qwen/Qwen3.5-9B
 https://huggingface.co/Qwen/Qwen3.5-4B
 https://huggingface.co/Qwen/Qwen3.5-2B
 https://huggingface.co/Qwen/Qwen3.5-0.8B
+
+Models available locally
+
+❯ ls /localdata/dagstuhl/ai_models/huggingface-full/Qwen
+Qwen3.5-0.8B  Qwen3.5-27B  Qwen3.5-2B  Qwen3.5-4B  Qwen3.5-9B
