@@ -1,0 +1,15 @@
+{
+  "model_load_seconds": 1.195192575454712,
+  "total_runtime_seconds": 547.5609953403473,
+  "num_calls": 2500,
+  "avg_latency_seconds": 0.12545705652236938,
+  "median_latency_seconds": 0.1243358850479126,
+  "tokens_per_second": 40.600346773573435,
+  "truncated_count": 0,
+  "truncated_rate": 0.0,
+  "peak_ram_mb": 2428.21875,
+  "peak_gpu_mb": 1496.7021484375,
+  "results_file": "experiment_Qwen3.5-0.8B_hf_title_20260806_212813_results.json",
+  "model": "Qwen3.5-0.8B",
+  "input_field": "title"
+}
