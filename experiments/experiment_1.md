@@ -106,7 +106,7 @@ Unlike the paper, abstracts did not produce more hallucinations than titles here
 
 ### Part 4: Full-scale Claude and a second Qwen3-8B run ("cpp" variant)
 
-Two more full 2500-document runs, both title and abstract, from `results/experiment_qwen3-8b_cpp_title_*`, `experiment_qwen3-8b_cpp_abstract_*`, `experiment_1_claude_title_*`, and `experiment_1_claude_cache_abstract_*`. The scripts behind these ("cpp" Qwen3-8B variant, and the full-scale Claude run with prompt caching) weren't built in this session, so implementation details aren't documented here, only the results, read via `src/analyze_results.py`.
+Two more full 2500-document runs, both title and abstract, from `results/experiment_qwen3-8b_cpp_title_*`, `experiment_qwen3-8b_cpp_abstract_*`, `experiment_1_claude_title_*`, and `experiment_1_claude_abstract_*`. The scripts behind these ("cpp" Qwen3-8B variant, and the full-scale Claude run) weren't built in this session, so implementation details aren't documented here, only the results, read via `src/analyze_results.py`. The abstract run's script attempted prompt caching, but every prompt fell under Anthropic's minimum cacheable size (4096 tokens), so caching silently never activated, this only affected cost/latency, not the answers themselves, and the script has since been retired (didn't test what it was meant to).
 
 Results (new matching):
 

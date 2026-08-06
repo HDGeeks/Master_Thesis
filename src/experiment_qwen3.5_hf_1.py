@@ -11,10 +11,17 @@ single-prompt approach, 1 model call per document, same prompt,
 vocabulary, document sample, matching logic, and output schema as the
 other three versions, so results are directly comparable.
 
-Model path is a global variable below, edit it directly to point at
-whichever local checkpoint you want to run (0.8B, 2B, 4B, 9B, 27B).
+Model size and input field are command-line arguments, not globals, so
+each size runs as its own process/job instead of looping over all sizes
+in one process (a crash or OOM on one size, e.g. 27B, then doesn't take
+the others down with it, and CUDA memory doesn't need to be released
+between models in the same process).
+
+Usage:
+    python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-9B --field abstract
 """
 
+import argparse
 import datetime
 import json
 import os
@@ -26,45 +33,13 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from matching import match_topic, canonicalize
 
-# Path to the local Qwen3.5 model folder to load. Change this to switch
-# checkpoints, e.g. Qwen3.5-0.8B, Qwen3.5-2B, Qwen3.5-4B, Qwen3.5-9B, Qwen3.5-27B.
-MODEL_PATH = "/localdata/dagstuhl/ai_models/huggingface-full/Qwen/Qwen3.5-9B"
-
+MODEL_BASE_DIR = "/localdata/dagstuhl/ai_models/huggingface-full/Qwen"
 NUM_SAMPLE_DOCS = 2500
-
-# Which field of each document to feed the model as input.
-# Set to "title" to use only the title, or "abstract" to use only the abstract.
-INPUT_FIELD = "abstract"  # "title" or "abstract"
 
 DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-
-
-def load_model():
-    """Load the tokenizer and model once, kept in memory for all 2500
-    calls (one long-lived process, same idea as the llama.cpp version).
-    Uses the MODEL_PATH global defined at the top of the file."""
-
-    if not os.path.isdir(MODEL_PATH):
-        raise FileNotFoundError(
-            f"Model folder not found at {MODEL_PATH}. Update the "
-            "MODEL_PATH global at the top of this file to point at one "
-            "of the folders under huggingface-full/Qwen/, this script "
-            "does not download anything automatically."
-        )
-
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_PATH,
-        torch_dtype="auto",  # match whatever dtype the checkpoint was saved in (bf16 for these Qwen files)
-        device_map="auto",   # spread across visible GPUs, fall back to CPU if none
-    )
-    model.eval()  # inference only, disables dropout and similar training-only layers
-
-    return model, tokenizer
 
 
 def load_sample_documents(num_docs):
@@ -82,8 +57,8 @@ def load_vocabulary():
     return [canonicalize(t) for t in targets]
 
 
-def build_prompt(input_text, vocabulary):
-    """Build the prompt. input_text is whatever field INPUT_FIELD points
+def build_prompt(input_text, vocabulary, field_label):
+    """Build the prompt. input_text is whatever field field_label points
     to (title or abstract), the wording adapts to name that field so the
     model gets an accurate description of what it is reading.
 
@@ -94,7 +69,6 @@ def build_prompt(input_text, vocabulary):
     model folder if you need to confirm this before a full run."""
 
     targets_string = ", ".join(vocabulary)
-    field_label = INPUT_FIELD  # "title" or "abstract", used directly in the prompt text
 
     return (
         "We want to create a list of topics. We call this list targets_list.\n"
@@ -176,30 +150,64 @@ def classify_answer(raw_answer, vocabulary, ground_truth_subjects):
     return old_category, old_topic, new_category, new_topic
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--model",
+        default="Qwen3.5-9B",
+        help="Checkpoint folder name under " + MODEL_BASE_DIR + " (e.g. Qwen3.5-0.8B, Qwen3.5-2B, Qwen3.5-4B, Qwen3.5-9B, Qwen3.5-27B)",
+    )
+    parser.add_argument(
+        "--field",
+        choices=["title", "abstract"],
+        default="abstract",
+        help="Which document field to feed the model as input",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+    model_path = os.path.join(MODEL_BASE_DIR, args.model)
+    input_field = args.field
+
+    if not os.path.isdir(model_path):
+        raise FileNotFoundError(
+            f"Model folder not found at {model_path}. Pass --model with one "
+            f"of the folder names under {MODEL_BASE_DIR}, this script does "
+            "not download anything automatically."
+        )
+
     # Build a results filename that encodes which checkpoint produced it,
     # e.g. Qwen3.5-9B, so runs from different model sizes never overwrite
     # each other's output.
-    model_name = os.path.basename(MODEL_PATH.rstrip("/"))
     results_path = os.path.join(
         os.path.dirname(__file__), "..", "results",
-        f"experiment_{model_name}_hf_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
+        f"experiment_{args.model}_hf_{input_field}_{RUN_TIMESTAMP}_results.json",
     )
 
-    model, tokenizer = load_model()
+    # Load the tokenizer and model once, kept in memory for all 2500 calls
+    # (one long-lived process, same idea as the llama.cpp version).
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_path,
+        torch_dtype="auto",  # match whatever dtype the checkpoint was saved in (bf16 for these Qwen files)
+        device_map="auto",   # spread across visible GPUs, fall back to CPU if none
+    )
+    model.eval()  # inference only, disables dropout and similar training-only layers
 
     vocabulary = load_vocabulary()
     documents = load_sample_documents(NUM_SAMPLE_DOCS)
 
     results = []
     for i, doc in enumerate(documents, start=1):
-        # Pull whichever field INPUT_FIELD points to (title or abstract) as the model input.
-        input_text = doc[INPUT_FIELD]
+        # Pull whichever field --field points to (title or abstract) as the model input.
+        input_text = doc[input_field]
         ground_truth = [canonicalize(s) for s in doc["subjects"]]
 
         print(f"[{i}/{len(documents)}] {input_text}")
 
-        prompt = build_prompt(input_text, vocabulary)
+        prompt = build_prompt(input_text, vocabulary, input_field)
         raw_answer = ask_model(model, tokenizer, prompt)
 
         old_cat, old_topic, new_cat, new_topic = classify_answer(
@@ -212,8 +220,8 @@ def main():
 
         results.append({
             "D3 ID": doc["D3 ID"],
-            "model": model_name,
-            "input_field": INPUT_FIELD,
+            "model": args.model,
+            "input_field": input_field,
             "input_text": input_text,
             "ground_truth_subjects": ground_truth,
             "raw_answer": raw_answer,
