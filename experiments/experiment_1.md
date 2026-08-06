@@ -139,4 +139,4 @@ Two findings:
 
 ### Status
 
-Full 2500-document runs complete for two models (Qwen3-8B, Claude), both title and abstract, both old and new matching. Part 2 (newer model quality check) is done. Next: decide the next branch per meeting 1's plan (cost optimization + multi-label + hierarchy, vs few-shot/fine-tuning), informed by these numbers.
+Full 2500-document runs complete for two models (Qwen3-8B, Claude), both title and abstract, both old and new matching. Part 2 (newer model quality check) is done. Follow-up question (does model size matter within a newer generation) spun off into experiments/experiment_2.md. Next: decide the next branch per meeting 1's plan (cost optimization + multi-label + hierarchy, vs few-shot/fine-tuning), informed by these numbers.

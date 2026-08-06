@@ -6,10 +6,9 @@ just experiment_qwen3.5_hf_1.py.
 
 import resource
 import statistics
+import subprocess
 import sys
 import time
-
-import torch
 
 
 def peak_ram_mb():
@@ -26,11 +25,39 @@ def peak_ram_mb():
 
 
 def peak_gpu_mb():
-    """Peak GPU memory allocated so far, in MB. 0 if no GPU is available."""
+    """Peak GPU memory allocated by PyTorch specifically, in MB. 0 if
+    torch isn't installed, has no GPU, or the backend doesn't use torch's
+    allocator at all (e.g. llama-cpp-python manages its own CUDA memory,
+    so this will read 0 for that backend, use gpu_memory_used_mb() instead
+    for backends that don't go through torch)."""
+
+    try:
+        import torch
+    except ImportError:
+        return 0
 
     if torch.cuda.is_available():
         return torch.cuda.max_memory_allocated() / (1024 ** 2)
     return 0
+
+
+def gpu_memory_used_mb():
+    """Current GPU memory in use, in MB, read directly from nvidia-smi.
+
+    Works regardless of which library actually allocated it (torch,
+    llama.cpp, ...), unlike peak_gpu_mb(). Downsides: it's a snapshot at
+    call time, not a tracked peak, and on a shared GPU it includes other
+    processes' usage too, not just this one. 0 if nvidia-smi isn't
+    available (no GPU, or not on this machine)."""
+
+    try:
+        output = subprocess.check_output(
+            ["nvidia-smi", "--query-gpu=memory.used", "--format=csv,noheader,nounits"],
+            text=True,
+        )
+        return float(output.strip().splitlines()[0])
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return 0
 
 
 class RunMetrics:
@@ -74,6 +101,7 @@ class RunMetrics:
             "truncated_rate": self.truncated_count / num_calls if num_calls else None,
             "peak_ram_mb": peak_ram_mb(),
             "peak_gpu_mb": peak_gpu_mb(),
+            "gpu_memory_used_mb": gpu_memory_used_mb(),
         }
 
     def print_summary(self):
@@ -93,4 +121,5 @@ class RunMetrics:
             print(f"Truncated answers (hit max_new_tokens): "
                   f"{stats['truncated_count']} ({stats['truncated_rate']:.1%})")
         print(f"Peak RAM: {stats['peak_ram_mb']:.0f} MB")
-        print(f"Peak GPU memory: {stats['peak_gpu_mb']:.0f} MB")
+        print(f"Peak GPU memory (torch-tracked): {stats['peak_gpu_mb']:.0f} MB")
+        print(f"GPU memory in use (nvidia-smi, end of run): {stats['gpu_memory_used_mb']:.0f} MB")
