@@ -18,7 +18,7 @@ the others down with it, and CUDA memory doesn't need to be released
 between models in the same process).
 
 Usage:
-    python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-9B --field abstract
+    uv run python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-4B --field title
 """
 
 import argparse

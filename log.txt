@@ -1,0 +1,30 @@
+❯ uv run python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-4B --field title
+python3: can't open file '/home/kebede/Master_Thesis/experiment_qwen3.5_hf_1.py': [Errno 2] No such file or directory
+❯ uv run python3 src/experiment_qwen3.5_hf_1.py --model Qwen3.5-4B --field title
+[transformers] The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 426/426 [00:01<00:00, 406.40it/s]
+[1/2500] Modeling a 3D City Model and Its Levels of Detail as a True 4D Model
+Traceback (most recent call last):
+  File "/home/kebede/Master_Thesis/.venv/lib/python3.10/site-packages/transformers/tokenization_utils_base.py", line 289, in __getattr__
+    return self.data[item]
+KeyError: 'shape'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/kebede/Master_Thesis/src/experiment_qwen3.5_hf_1.py", line 288, in <module>
+    main()
+  File "/home/kebede/Master_Thesis/src/experiment_qwen3.5_hf_1.py", line 227, in main
+    raw_answer, seconds, output_tokens, truncated = ask_model(model, tokenizer, prompt)
+  File "/home/kebede/Master_Thesis/src/experiment_qwen3.5_hf_1.py", line 122, in ask_model
+    output_ids = model.generate(
+  File "/home/kebede/Master_Thesis/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/kebede/Master_Thesis/.venv/lib/python3.10/site-packages/transformers/generation/utils.py", line 2534, in generate
+    batch_size = inputs_tensor.shape[0]
+  File "/home/kebede/Master_Thesis/.venv/lib/python3.10/site-packages/transformers/tokenization_utils_base.py", line 291, in __getattr__
+    raise AttributeError
+AttributeError
+
+~/Master_Thesis main !1                                                                                                                                                                                                                         7s 🐍 Master_Thesis 08:58:03 PM
+❯ 
