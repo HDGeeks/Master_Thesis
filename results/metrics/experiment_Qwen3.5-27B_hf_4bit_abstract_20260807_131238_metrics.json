@@ -1,0 +1,16 @@
+{
+  "model_load_seconds": 9.308687686920166,
+  "total_runtime_seconds": 1258.7512505054474,
+  "num_calls": 2500,
+  "avg_latency_seconds": 0.4475462776184082,
+  "median_latency_seconds": 0.4371095895767212,
+  "tokens_per_second": 7.9857663413464985,
+  "truncated_count": 0,
+  "truncated_rate": 0.0,
+  "peak_ram_mb": 52351.0078125,
+  "peak_gpu_mb": 18892.0966796875,
+  "gpu_memory_used_mb": 19634.0,
+  "results_file": "experiment_Qwen3.5-27B_hf_4bit_abstract_20260807_131238_results.json",
+  "model": "Qwen3.5-27B",
+  "input_field": "abstract"
+}
