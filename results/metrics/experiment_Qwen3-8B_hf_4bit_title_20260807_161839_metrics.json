@@ -1,0 +1,16 @@
+{
+  "model_load_seconds": 4.911569833755493,
+  "total_runtime_seconds": 353.64661169052124,
+  "num_calls": 2500,
+  "avg_latency_seconds": 0.11809635047912598,
+  "median_latency_seconds": 0.09707176685333252,
+  "tokens_per_second": 34.63612536208725,
+  "truncated_count": 4,
+  "truncated_rate": 0.0016,
+  "peak_ram_mb": 16586.92578125,
+  "peak_gpu_mb": 6276.9892578125,
+  "gpu_memory_used_mb": 6832.0,
+  "results_file": "experiment_Qwen3-8B_hf_4bit_title_20260807_161839_results.json",
+  "model": "Qwen3-8B",
+  "input_field": "title"
+}
