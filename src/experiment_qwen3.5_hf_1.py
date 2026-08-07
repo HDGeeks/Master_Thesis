@@ -19,6 +19,14 @@ between models in the same process).
 
 Usage:
     uv run python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-4B --field title
+
+For a checkpoint too large to fit in bf16 on this GPU (27B needs ~54GB,
+this card has 24GB), pass --quantize 4bit. Without it, device_map="auto"
+will silently offload the overflow to CPU RAM, which is dramatically
+slower (single-threaded tensor shuffling between CPU and GPU per layer,
+not real parallel compute) rather than failing loudly, so it is easy to
+not notice until a run that should take ~15 minutes is still going after
+hours.
 """
 
 import argparse
@@ -30,7 +38,7 @@ import re
 import time
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 from matching import match_topic, canonicalize
 from metrics import RunMetrics
@@ -180,6 +188,13 @@ def parse_args():
         default="abstract",
         help="Which document field to feed the model as input",
     )
+    parser.add_argument(
+        "--quantize",
+        choices=["none", "4bit"],
+        default="none",
+        help="Load in 4-bit (bitsandbytes) instead of the checkpoint's native "
+             "bf16, needed for checkpoints too large to fit in bf16 on this GPU",
+    )
     return parser.parse_args()
 
 
@@ -197,10 +212,12 @@ def main():
 
     # Build a results filename that encodes which checkpoint produced it,
     # e.g. Qwen3.5-9B, so runs from different model sizes never overwrite
-    # each other's output.
+    # each other's output. "_4bit" tag when quantized, so it's not
+    # confused with the native-precision runs of the same model.
+    quant_tag = "_4bit" if args.quantize == "4bit" else ""
     results_path = os.path.join(
         os.path.dirname(__file__), "..", "results",
-        f"experiment_{args.model}_hf_{input_field}_{RUN_TIMESTAMP}_results.json",
+        f"experiment_{args.model}_hf{quant_tag}_{input_field}_{RUN_TIMESTAMP}_results.json",
     )
 
     metrics = RunMetrics()
@@ -209,10 +226,20 @@ def main():
     # (one long-lived process, same idea as the llama.cpp version).
     load_start = time.time()
     tokenizer = AutoTokenizer.from_pretrained(model_path)
+
+    if args.quantize == "4bit":
+        quantization_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,  # compute in bf16, only the stored weights are 4-bit
+        )
+    else:
+        quantization_config = None
+
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
         torch_dtype="auto",  # match whatever dtype the checkpoint was saved in (bf16 for these Qwen files)
         device_map="auto",   # spread across visible GPUs, fall back to CPU if none
+        quantization_config=quantization_config,
     )
     model.eval()  # inference only, disables dropout and similar training-only layers
     metrics.record_load(time.time() - load_start)

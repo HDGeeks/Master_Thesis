@@ -42,6 +42,25 @@ Metrics: title run 547.6s (~9.1 min), abstract run 446.9s (~7.4 min), ~40 tokens
 
 **Finding**: a real drop from 4B, about 23 points lower on success. So size does matter within the family, going from 4B to 0.8B costs a lot, even though 4B itself already beat the larger, older-gen Qwen3-8B. The interesting nuance is where the drop shows up: hallucination stays low even at 0.8B (0.6%/2.4%, close to 4B's 0.6%/1.0%), what collapses is judgment, not format-following, misclassified jumps to 47.3%/43.9% (vs 24.0%/22.3% at 4B). Reads as: staying inside the controlled vocabulary is a low bar even a small model clears, picking the *correct* topic is what actually needs the extra capacity. Also notable: 0.8B (52.1% titles) still barely edges out the original paper's Llama 3 8B (50%), a model 10x its size from an older generation.
 
+### Qwen3.5-9B
+
+| | Success | Misclassified | Hallucination |
+|---|---|---|---|
+| Titles (new matching) | 78.6% | 20.8% | 0.6% |
+| Abstracts (new matching) | 80.8% | 18.7% | 0.5% |
+
+Metrics: title run 656.6s (~10.9 min, almost identical to 4B's 657.7s despite being a bigger model, still memory-bandwidth-bound rather than compute-bound at this size on the 4090), abstract run 931.2s (~15.5 min, clearly slower than title here, unlike 4B where abstract was oddly faster). ~28.2/26.5 tokens/sec (title/abstract), zero truncation. Peak GPU memory 17.2-17.6GB, matches the earlier "~18GB, tight but should fit" estimate almost exactly, ~6-7GB headroom left on the 24GB card.
+
+**Best result of the project so far**, and the scaling picture across the three Qwen3.5 sizes run to date is clean and monotonic:
+
+| Size | Titles | Abstracts |
+|---|---|---|
+| 0.8B | 52.1% | 53.7% |
+| 4B | 75.4% | 76.7% |
+| 9B | 78.6% | 80.8% |
+
+Bigger keeps winning, but with clear diminishing returns: 0.8B→4B is a +23 point jump, 4B→9B is only +3-4 points. Most of the achievable gain from scale is already captured by 4B, worth keeping in mind when weighing whether 27B is worth the trouble (VRAM risk, quantization, slower runtime) for a comparatively small further gain.
+
 ### Full comparison across both experiments
 
 | Run | Success | Misclassified | Hallucination |
@@ -56,7 +75,9 @@ Metrics: title run 547.6s (~9.1 min), abstract run 446.9s (~7.4 min), ~40 tokens
 | Claude, abstracts | 74.0% | 23.3% | 2.7% |
 | Qwen3.5-4B, titles | 75.4% | 24.0% | 0.6% |
 | Qwen3.5-4B, abstracts | 76.7% | 22.3% | 1.0% |
+| Qwen3.5-9B, titles | 78.6% | 20.8% | 0.6% |
+| Qwen3.5-9B, abstracts | 80.8% | 18.7% | 0.5% |
 
 ## Status
 
-Qwen3.5-0.8B and Qwen3.5-4B done (title + abstract each). Remaining: 2B, 9B, and 27B (pending the quantization decision above). Each runs as `python3 experiment_qwen3.5_hf_1.py --model Qwen3.5-<size> --field <title|abstract>`.
+Qwen3.5-0.8B, 4B, and 9B done (title + abstract each). Remaining: 2B and 27B (pending the quantization decision above). Qwen3-8B (non-3.5, full checkpoint) also queued now via the same HF script (see run.sh), the separate llama.cpp version has been retired. Each runs as `python3 experiment_qwen3.5_hf_1.py --model <name> --field <title|abstract>`.
