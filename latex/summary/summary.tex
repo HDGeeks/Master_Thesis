@@ -1,0 +1,190 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes}
+\usepackage[scale=0.92]{tgheros}
+
+\usepackage[a4paper, margin=1.25in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.6em, itemsep=5pt, topsep=6pt}
+
+\usepackage{newunicodechar}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{≤}{\ensuremath{\le}}
+\newunicodechar{≥}{\ensuremath{\ge}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\pagestyle{plain}
+
+\title{\sffamily\vspace{-2em} Zero-Shot Topic Labeling: Extensions and Model Comparison\\[0.3em]\large Supervisor Meeting Summary}
+\author{\sffamily Daniel Tesfai}
+\date{\sffamily \today}
+
+\begin{document}
+
+\maketitle
+\vspace{-1.5em}
+
+\section{Starting Point}
+
+\begin{itemize}
+    \item Base paper (BTW2025-122): zero-shot topic labeling with Llama 3 8B, 19-topic vocabulary, 2500 papers.
+    \item Reported baseline: 50\% success, hallucination 25\% (titles) / 33\% (abstracts).
+    \item Two extensions investigated: (1) fixing the matching step, (2) testing newer models and model size.
+\end{itemize}
+
+\section{Extension 1: Matching Fix}
+
+\begin{itemize}
+    \item Original matching: exact string match only, breaks on quotes or near-miss wording.
+    \item Fix: strip punctuation, then word-containment fuzzy match, with the ontology's parent category (\texttt{computer science}) explicitly excluded from auto-resolution.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Input & Old matching & New matching \\
+\midrule
+\texttt{"'software engineering'"} & hallucination & software engineering \\
+\texttt{computer vision} & hallucination & computer imaging and vision \\
+\texttt{computer science} & hallucination & hallucination (correct) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At full scale (Qwen3-8B, titles): 103/2500 answers (4.1\%) recovered by the fix, all the literal string \texttt{computer vision}, 83 became successes, 20 became misclassified, 0 stayed unresolved.
+
+\section{Extension 2: Newer Models vs.\ Paper Baseline}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & Success & Misclassified & Hallucination \\
+\midrule
+Paper (Llama 3 8B), titles & 50\% & 25\% & 25\% \\
+Paper (Llama 3 8B), abstracts & 50\% & 17\% & 33\% \\
+Qwen3-8B, titles & 67.5\% & 29.8\% & 2.8\% \\
+Qwen3-8B, abstracts & 66.5\% & 30.3\% & 3.2\% \\
+Claude Haiku 4.5, titles & 70.9\% & 27.6\% & 1.5\% \\
+Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Every newer model beats the paper by a wide margin, driven mainly by hallucination collapsing to under 4\%.
+    \item Titles vs.\ abstracts: Qwen3-8B favors titles, Claude favors abstracts, opposite directions. More context helping is model-dependent, not a fixed task property.
+\end{itemize}
+
+\section{Extension 3: Does Model Size Matter?}
+
+Same task, same prompt, Qwen3.5 family at five sizes (0.8B to 27B).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Size & Titles & Abstracts \\
+\midrule
+0.8B & 52.1\% & 53.7\% \\
+4B & 75.4\% & 76.7\% \\
+9B & 78.6\% & 80.8\% \\
+27B & 76.0\% & 77.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{9B achieves the highest accuracy}, not the largest model tested. Scaling helps sharply to 4B, a little more to 9B, then reverses at 27B.
+    \item 0.8B already beats the paper's Llama 3 8B baseline (52.1\% vs 50\%), a model ten times its size, from an older generation.
+\end{itemize}
+
+\section{Bonus Finding: Quantization Sensitivity Scales With Size}
+
+\begin{itemize}
+    \item \textbf{What:} storing and computing a model's weights with fewer bits than the precision it was trained in. Here: 16-bit floating point (bf16) reduced to 4-bit. A lossy compression of the model's parameters, not the model itself.
+    \item \textbf{How:} weights are grouped into small blocks, each block gets a scale factor so its original range of values can be represented with only 16 discrete levels (4 bits) instead of the full 16-bit range. Weights are converted back to a working precision (``dequantized'') just before each computation, so this introduces a small, bounded amount of numerical error per weight, not a change to the model's architecture or training.
+    \item \textbf{Why:} roughly 4x less memory per parameter. This is what let the 27B checkpoint (needs $\sim$54GB in bf16) fit entirely on a single 24GB GPU, avoiding a much slower fallback where the excess spills into system RAM. It can also increase inference speed, since less data has to move through memory per token generated.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llccc}
+\toprule
+Size & Field & bf16 & 4-bit & Difference \\
+\midrule
+0.8B & titles & 52.1\% & 39.2\% & \textbf{-12.9 pts} \\
+0.8B & abstracts & 53.7\% & 27.6\% & \textbf{-26.1 pts} \\
+4B & titles & 75.4\% & 74.6\% & -0.8 pts \\
+9B & titles & 78.6\% & 80.0\% & +1.4 pts \\
+27B & titles & 75.4\% & 76.0\% & +0.6 pts \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item Small models are fragile under 4-bit quantization, 0.8B loses over a quarter of its accuracy edge.
+    \item 4B and up are effectively indifferent, gains and losses under 1.5 points.
+    \item Found by accident (a script bug applied quantization to every size, not only 27B), but every repeat run came back bit-identical, generation is fully deterministic, so this is a real precision effect, not noise.
+\end{itemize}
+
+\section{Full Results Table}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+Run & Success & Misclassified & Hallucination \\
+\midrule
+Paper (Llama 3 8B), titles & 50\% & 25\% & 25\% \\
+Paper (Llama 3 8B), abstracts & 50\% & 17\% & 33\% \\
+Qwen3.5-0.8B, titles & 52.1\% & 47.3\% & 0.6\% \\
+Qwen3.5-0.8B, abstracts & 53.7\% & 43.9\% & 2.4\% \\
+Qwen3-8B, titles & 67.5\% & 29.8\% & 2.8\% \\
+Qwen3-8B, abstracts & 66.5\% & 30.3\% & 3.2\% \\
+Claude Haiku 4.5, titles & 70.9\% & 27.6\% & 1.5\% \\
+Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
+Qwen3.5-4B, titles & 75.4\% & 24.0\% & 0.6\% \\
+Qwen3.5-4B, abstracts & 76.7\% & 22.3\% & 1.0\% \\
+Qwen3.5-9B, titles & 78.6\% & 20.8\% & 0.6\% \\
+Qwen3.5-9B, abstracts & 80.8\% & 18.7\% & 0.5\% \\
+Qwen3.5-27B, titles (4-bit) & 76.0\% & 24.0\% & 0.04\% \\
+Qwen3.5-27B, abstracts (4-bit) & 77.0\% & 22.9\% & 0.1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+
+\begin{itemize}
+    \item \textbf{Extension 1 (matching fix):} mainly moves the hallucination column, not the model's actual answers. 4.1\% of Qwen3-8B title answers were wrongly counted as hallucination due to fragile exact-string matching; the fix recovered most of them into success. Part of the paper's reported hallucination rate is a measurement artifact, not only a model failure.
+    \item \textbf{Extension 2 (newer models):} mainly collapses hallucination, from 25--33\% (paper) to under 4\% for every newer model tested, while success rises 17--30 points and misclassified stays roughly flat or rises slightly. Newer, better instruction-tuned models are far better at staying inside the controlled vocabulary; that alone accounts for most of the improvement over the paper's baseline, not necessarily better topic judgment.
+    \item \textbf{Extension 3 (model size):} hallucination stays low and flat across every size tested (0.6\% to 2.4\%, no trend with size), so hallucination is a generation/training effect, not a size effect. What moves with size is the success/misclassified split: 0.8B misclassifies nearly half the time (47.3\%/43.9\%), 9B misclassifies about a fifth of the time. Size affects whether the model picks the \emph{correct} topic, not whether it stays inside the vocabulary, and this effect does not improve indefinitely, it peaks at 9B and reverses at 27B.
+    \item \textbf{Taken together:} the three extensions target different parts of the original failure mode. The matching fix and newer models both attack hallucination, one through evaluation robustness, the other through instruction-following, while model size mainly shifts the success/misclassified balance, that is, topic judgment, with diminishing and eventually reversing returns.
+\end{itemize}
+
+\section{Open Questions for Discussion}
+
+\begin{itemize}
+    \item Which direction next: cost optimization and multi-label evaluation, or few-shot prompting?
+    \item Worth running Qwen3.5-2B to fill the one gap in the size sweep?
+    \item How to frame the 9B-is-the-sweet-spot finding in the thesis narrative?
+\end{itemize}
+
+\end{document}

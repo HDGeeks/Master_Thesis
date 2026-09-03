@@ -345,7 +345,7 @@ Size & Titles & Abstracts \\
 \end{tabular}
 \end{table}
 
-Within this model family, on this task, \textbf{9B is the accuracy sweet spot}, not the largest checkpoint tested. Scaling helps sharply from 0.8B to 4B, keeps helping a little through 9B, and then reverses at 27B. This framing is preferred in the thesis over a flat bigger-is-better narrative, since the data directly contradicts that story at the top end.
+Within this model family, on this task, \textbf{9B achieves the highest accuracy}, not the largest checkpoint tested. Scaling helps sharply from 0.8B to 4B, keeps helping a little through 9B, and then reverses at 27B. This framing is preferred in the thesis over a flat bigger-is-better narrative, since the data directly contradicts that story at the top end.
 
 \subsection{Overall Comparison Across Both Investigations}
 
@@ -498,4 +498,4 @@ abstract & 4-bit (bnb) & 63.1\% & 29.8\% & 7.0\% \\
 
 \subsection{Status}
 
-Both investigations are complete. The newer-model quality check found that every newer model tested beat the paper's Llama 3 8B baseline by a wide margin, driven mostly by a collapse in hallucination rate rather than a shift in raw success rate. The size sweep found that this improvement is not simply a function of parameter count: scaling within the Qwen3.5 family helps sharply up to 4B, keeps helping modestly to 9B, and then reverses at 27B, with 9B standing as the accuracy sweet spot of the sizes tested. A further, unplanned finding showed that quantization sensitivity itself scales inversely with model size, with the smallest checkpoint losing over a quarter of its accuracy edge under 4-bit quantization while the largest checkpoints were unaffected or slightly favorable. Remaining future work: Qwen3.5-2B has not yet been run, and would fill in the one gap in the size sweep between 0.8B and 4B.
+Both investigations are complete. The newer-model quality check found that every newer model tested beat the paper's Llama 3 8B baseline by a wide margin, driven mostly by a collapse in hallucination rate rather than a shift in raw success rate. The size sweep found that this improvement is not simply a function of parameter count: scaling within the Qwen3.5 family helps sharply up to 4B, keeps helping modestly to 9B, and then reverses at 27B, with 9B achieving the highest accuracy of the sizes tested. A further, unplanned finding showed that quantization sensitivity itself scales inversely with model size, with the smallest checkpoint losing over a quarter of its accuracy edge under 4-bit quantization while the largest checkpoints were unaffected or slightly favorable. Remaining future work: Qwen3.5-2B has not yet been run, and would fill in the one gap in the size sweep between 0.8B and 4B.
