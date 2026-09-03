@@ -11,3 +11,10 @@ __pycache__/
 *.pyc
 .venv/
 models/
+
+# LaTeX build artifacts, main.pdf is the one output worth keeping
+latex/**/*.aux
+latex/**/*.log
+latex/**/*.out
+latex/**/*.toc
+latex/**/*.synctex.gz

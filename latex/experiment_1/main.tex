@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+
+% =========================
+% Font (pdfLaTeX, no fontspec/XeLaTeX needed)
+% TeX Gyre Termes (serif body, a refined Times, the standard serious
+% academic look) + TeX Gyre Heros (sans headings, a refined Helvetica).
+% Both are complete, self-contained font families. \sffamily below
+% means Heros once loaded.
+% =========================
+\usepackage[T1]{fontenc}
+\usepackage{tgtermes}
+\usepackage[scale=0.92]{tgheros}
+
+% =========================
+% Layout
+% =========================
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\emergencystretch=2em          % reduces overfull-hbox warnings without full \sloppy
+
+% =========================
+% Floats / placement
+% =========================
+\usepackage{float}
+\usepackage{placeins}
+
+% =========================
+% Math & Tables
+% =========================
+\usepackage{amsmath,amsfonts}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% =========================
+% Figures & formatting
+% =========================
+\usepackage{graphicx}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage{caption}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% =========================
+% Unicode helpers (pdfLaTeX only understands ASCII by default,
+% these declare the specific characters our tables/prose use)
+% =========================
+\usepackage{newunicodechar}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{−}{\ensuremath{-}}
+% en-dash (–) and em-dash (—) are already handled by the LaTeX kernel's
+% native UTF-8 support, declaring them again just triggers a warning
+\newunicodechar{≤}{\ensuremath{\le}}
+\newunicodechar{≥}{\ensuremath{\ge}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+
+% =========================
+% Citations (for once the thesis has a bibliography)
+% =========================
+\usepackage[authoryear,round]{natbib}
+\setcitestyle{aysep={,},citesep={;},open={(},close={)}}
+
+% =========================
+% Hyperlinks (load late). No colors: links stay fully clickable in the
+% PDF but print as plain black text, standard for a formal document.
+% =========================
+\usepackage[hidelinks]{hyperref}
+
+% =========================
+% Section formatting: sans-serif (Biolinum) headings against the
+% serif (Libertine) body, no color, weight and size carry the hierarchy
+% =========================
+\titleformat{\section}{\sffamily\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries\itshape}{\thesubsubsection}{1em}{}
+
+% =========================
+% Header & footer
+% =========================
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\rhead{\sffamily Daniel Tesfai}
+\lhead{\sffamily Master's Thesis Working Notes}
+\cfoot{\thepage}
+
+\title{\sffamily Master's Thesis: Working Notes}
+\author{\sffamily Daniel Tesfai}
+\date{\sffamily \today}
+
+\begin{document}
+
+\maketitle
+
+\begingroup
+  \setlength{\parskip}{0pt}
+  \setcounter{tocdepth}{2}
+  \tableofcontents
+\endgroup
+
+\bigskip
+\hrule
+\bigskip
+
+\input{ex_1}
+
+\end{document}
