@@ -41,9 +41,17 @@ DATASET_DIR = os.path.join(
     os.path.dirname(__file__), "..", "reference-repo", "data", "assets_example"
 )
 RUN_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+# Same results/<model>/<field>/<precision>/ layout as the Qwen scripts.
+# Folder name is the full model, "Claude-Haiku-4.5", not just "Claude",
+# so a different Claude model used later doesn't collide with this one.
+# Claude is an API model, no local quantization applies, so it always
+# goes under "normal_bit" (whatever precision Anthropic serves it at).
+RESULTS_DIR = os.path.join(
+    os.path.dirname(__file__), "..", "results", "Claude-Haiku-4.5", INPUT_FIELD, "normal_bit"
+)
+os.makedirs(RESULTS_DIR, exist_ok=True)
 RESULTS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "results",
-    f"experiment_1_claude_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json",
+    RESULTS_DIR, f"experiment_1_claude_{INPUT_FIELD}_{RUN_TIMESTAMP}_results.json"
 )
 
 

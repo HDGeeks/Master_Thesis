@@ -162,7 +162,7 @@ Two findings stand out from this comparison:
 
 \begin{enumerate}
     \item \textbf{Hallucination collapses for both newer models, regardless of document representation.} The paper reported 25\% (titles) and 33\% (abstracts). Both Qwen3-8B and Claude stay under 4\% in every run. This looks like a model-generation effect rather than a title-versus-abstract effect: newer, better instruction-following models simply produce far less unparseable output in the first place.
-    \item \textbf{Titles versus abstracts diverge in opposite directions depending on the model.} Qwen3-8B is consistent across both this run and the earlier one: titles slightly outperform abstracts. Claude shows the opposite pattern, with abstracts clearly outperforming titles. This suggests that whether additional context helps depends on the specific model, not on a fixed property of the task, as the original paper's single-model result implied.
+    \item \textbf{Titles versus abstracts diverge in opposite directions depending on the model, at least under this backend.} Qwen3-8B here is consistent with the earlier local run: titles slightly outperform abstracts. Claude shows the opposite pattern, with abstracts clearly outperforming titles. At the time this looked like evidence that whether additional context helps depends on the specific model. That conclusion needed revising once Qwen3-8B was later run on its native bf16 precision instead of a quantized backend, see Section~\ref{sec:model-size-setup}: the direction flips, and titles versus abstracts turns out to be sensitive to backend and precision for this model, not a stable per-model property either.
 \end{enumerate}
 
 \subsubsection{Overall results comparison}
@@ -194,6 +194,7 @@ Claude, 2500 docs, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 At this point the newer-model quality check was complete: every newer model tested beat the paper's Llama 3 8B baseline by a wide margin, driven mostly by a collapse in hallucination rate. This raised a direct follow-up question. Qwen3-8B (8 billion parameters) and Claude (size undisclosed, presumably much larger) both beat a same-generation-class Llama 3 8B badly, so is this improvement really about newer training, or could a big part of it just be model size? The rest of this section answers that question directly, by holding the model family fixed and varying only size.
 
 \subsection{Extending to Model Size: the Qwen3.5 Family}
+\label{sec:model-size-setup}
 
 \subsubsection{Setup}
 
@@ -228,7 +229,7 @@ Abstracts & 76.7\% & 22.3\% & 1.0\% \\
 \end{tabular}
 \end{table}
 
-Qwen3.5-4B, at less than half the parameter count of Qwen3-8B, beats both Qwen3-8B (67.5\% / 66.5\%) and Claude (70.9\% / 74.0\%) on success rate. This is the first direct evidence that newer generation matters more than raw size, at least at this data point. It also matches Claude's title-versus-abstract direction (abstracts slightly ahead) rather than Qwen3-8B's.
+Qwen3.5-4B, at less than half the parameter count of Qwen3-8B, beats both Qwen3-8B (68.2\% / 70.0\%, native bf16 precision) and Claude (70.9\% / 74.0\%) on success rate. This is the first direct evidence that newer generation matters more than raw size, at least at this data point. It also matches the title-versus-abstract direction of both Qwen3-8B and Claude at native precision (abstracts slightly ahead in every case).
 
 \subsubsection{Qwen3.5-0.8B}
 
@@ -363,8 +364,8 @@ Paper (Llama 3 8B), titles & 50\% & 25\% & 25\% \\
 Paper (Llama 3 8B), abstracts & 50\% & 17\% & 33\% \\
 Qwen3.5-0.8B, titles & 52.1\% & 47.3\% & 0.6\% \\
 Qwen3.5-0.8B, abstracts & 53.7\% & 43.9\% & 2.4\% \\
-Qwen3-8B, titles & 67.5\% & 29.8\% & 2.8\% \\
-Qwen3-8B, abstracts & 66.5\% & 30.3\% & 3.2\% \\
+Qwen3-8B, titles & 68.2\% & 29.3\% & 2.5\% \\
+Qwen3-8B, abstracts & 70.0\% & 27.2\% & 2.8\% \\
 Claude, titles & 70.9\% & 27.6\% & 1.5\% \\
 Claude, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 Qwen3.5-4B, titles & 75.4\% & 24.0\% & 0.6\% \\
@@ -405,7 +406,7 @@ Size & Field & bf16 & 4-bit & Difference \\
 
 The pattern is clean and monotonic: quantization sensitivity drops sharply as model size increases. The 0.8B checkpoint is fragile, losing 13 to 26 points, more than half of its edge over random guessing on abstracts. By 4B the effect is mostly absorbed, under 2.5 points lost. At 9B and 27B the model is effectively indifferent to 4-bit quantization, with gains and losses both staying under 1.5 points, likely noise level. This reads as larger models having more redundant capacity to tolerate precision loss, while smaller ones have no slack to spare.
 
-A secondary supporting data point comes from Qwen3-8B (the older, non-3.5 generation) under \texttt{bitsandbytes} 4-bit quantization, which scored 64.0\% / 63.1\% with notably higher hallucination (7.8\% / 7.0\%), meaningfully worse than the same checkpoint's earlier GGUF Q4\_K\_M run (67.5\% / 66.5\%, 2.8\% / 3.2\% hallucination). Different quantization method, identical underlying checkpoint, a real difference in outcome. This is consistent with older or less robustly trained checkpoints being generally less tolerant of quantization noise, not only a pure model-size effect.
+A secondary supporting data point comes from Qwen3-8B (the older, non-3.5 generation), which was run under three different precisions on the identical checkpoint: native bf16 (68.2\% / 70.0\%, hallucination 2.5\% / 2.8\%), GGUF Q4\_K\_M via llama.cpp (67.5\% / 66.5\%, hallucination 2.8\% / 3.2\%), and \texttt{bitsandbytes} 4-bit (64.0\% / 63.1\%, hallucination 7.8\% / 7.0\%). Native precision is best, GGUF's 4-bit is close behind, and \texttt{bitsandbytes}'s 4-bit is meaningfully worse on both success and hallucination. Same checkpoint, same task, three outcomes purely from precision and quantization algorithm choice. This is consistent with older or less robustly trained checkpoints being generally less tolerant of quantization noise than the Qwen3.5 sizes above, not only a pure model-size effect, and it reinforces the same lesson from a different angle: quantization method, not just bit-width, determines how much accuracy is actually lost.
 
 \subsection{Per-Model Raw Run Tables}
 
@@ -486,9 +487,11 @@ abstract & 4-bit & 77.0\% & 22.9\% & 0.1\% \\
 \toprule
 Field & Precision & Success & Misclassified & Hallucination \\
 \midrule
+title & bf16 (native) & 68.2\% & 29.3\% & 2.5\% \\
 title & GGUF Q4\_K\_M & 67.5\% & 29.8\% & 2.8\% \\
 title & 4-bit (bnb) & 64.0\% & 28.2\% & 7.8\% \\
 title & 4-bit (bnb) & 64.0\% & 28.2\% & 7.8\% \\
+abstract & bf16 (native) & 70.0\% & 27.2\% & 2.8\% \\
 abstract & GGUF Q4\_K\_M & 66.5\% & 30.3\% & 3.2\% \\
 abstract & 4-bit (bnb) & 63.1\% & 29.8\% & 7.0\% \\
 abstract & 4-bit (bnb) & 63.1\% & 29.8\% & 7.0\% \\

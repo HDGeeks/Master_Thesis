@@ -210,14 +210,16 @@ def main():
             "not download anything automatically."
         )
 
-    # Build a results filename that encodes which checkpoint produced it,
-    # e.g. Qwen3.5-9B, so runs from different model sizes never overwrite
-    # each other's output. "_4bit" tag when quantized, so it's not
-    # confused with the native-precision runs of the same model.
-    quant_tag = "_4bit" if args.quantize == "4bit" else ""
+    # Results are organized as results/<model>/<field>/<precision>/, so
+    # runs are easy to browse and never collide with each other, e.g.
+    # results/Qwen3.5-9B/title/normal_bit/experiment_..._results.json
+    precision_dir = "4_bit" if args.quantize == "4bit" else "normal_bit"
+    run_dir = os.path.join(
+        os.path.dirname(__file__), "..", "results", args.model, input_field, precision_dir
+    )
+    os.makedirs(run_dir, exist_ok=True)
     results_path = os.path.join(
-        os.path.dirname(__file__), "..", "results",
-        f"experiment_{args.model}_hf{quant_tag}_{input_field}_{RUN_TIMESTAMP}_results.json",
+        run_dir, f"experiment_{args.model}_{input_field}_{RUN_TIMESTAMP}_results.json"
     )
 
     metrics = RunMetrics()
@@ -289,9 +291,9 @@ def main():
 
     metrics.print_summary()
 
-    # Metrics live in their own subfolder, separate from the results
-    # files, same filename stem otherwise.
-    metrics_dir = os.path.join(os.path.dirname(__file__), "..", "results", "metrics")
+    # Metrics live in a "metrics" subfolder right next to the results
+    # file, same run_dir, same filename stem otherwise.
+    metrics_dir = os.path.join(run_dir, "metrics")
     os.makedirs(metrics_dir, exist_ok=True)
     metrics_filename = os.path.basename(results_path).replace("_results.json", "_metrics.json")
     metrics_path = os.path.join(metrics_dir, metrics_filename)

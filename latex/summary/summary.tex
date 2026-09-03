@@ -78,8 +78,8 @@ Model & Success & Misclassified & Hallucination \\
 \midrule
 Paper (Llama 3 8B), titles & 50\% & 25\% & 25\% \\
 Paper (Llama 3 8B), abstracts & 50\% & 17\% & 33\% \\
-Qwen3-8B, titles & 67.5\% & 29.8\% & 2.8\% \\
-Qwen3-8B, abstracts & 66.5\% & 30.3\% & 3.2\% \\
+Qwen3-8B, titles & 68.2\% & 29.3\% & 2.5\% \\
+Qwen3-8B, abstracts & 70.0\% & 27.2\% & 2.8\% \\
 Claude Haiku 4.5, titles & 70.9\% & 27.6\% & 1.5\% \\
 Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 \bottomrule
@@ -88,7 +88,7 @@ Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 
 \begin{itemize}
     \item Every newer model beats the paper by a wide margin, driven mainly by hallucination collapsing to under 4\%.
-    \item Titles vs.\ abstracts: Qwen3-8B favors titles, Claude favors abstracts, opposite directions. More context helping is model-dependent, not a fixed task property.
+    \item Titles vs.\ abstracts: at native precision, Qwen3-8B and Claude both favor abstracts, matching every Qwen3.5 size tested in Section 4. An earlier GGUF-quantized run of Qwen3-8B had shown the opposite (titles ahead), which in hindsight looks like a precision artifact of that specific backend, not a genuine per-model difference.
 \end{itemize}
 
 \section{Extension 3: Does Model Size Matter?}
@@ -156,8 +156,8 @@ Paper (Llama 3 8B), titles & 50\% & 25\% & 25\% \\
 Paper (Llama 3 8B), abstracts & 50\% & 17\% & 33\% \\
 Qwen3.5-0.8B, titles & 52.1\% & 47.3\% & 0.6\% \\
 Qwen3.5-0.8B, abstracts & 53.7\% & 43.9\% & 2.4\% \\
-Qwen3-8B, titles & 67.5\% & 29.8\% & 2.8\% \\
-Qwen3-8B, abstracts & 66.5\% & 30.3\% & 3.2\% \\
+Qwen3-8B, titles & 68.2\% & 29.3\% & 2.5\% \\
+Qwen3-8B, abstracts & 70.0\% & 27.2\% & 2.8\% \\
 Claude Haiku 4.5, titles & 70.9\% & 27.6\% & 1.5\% \\
 Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 Qwen3.5-4B, titles & 75.4\% & 24.0\% & 0.6\% \\
@@ -184,7 +184,7 @@ Qwen3.5-27B, abstracts (4-bit) & 77.0\% & 22.9\% & 0.1\% \\
 \begin{itemize}
     \item Which direction next: cost optimization and multi-label evaluation, or few-shot prompting?
     \item Worth running Qwen3.5-2B to fill the one gap in the size sweep?
-    \item How to frame the 9B-is-the-sweet-spot finding in the thesis narrative?
+    \item How to frame the 9B-highest-accuracy finding in the thesis narrative?
 \end{itemize}
 
 \end{document}

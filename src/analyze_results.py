@@ -2,7 +2,7 @@
 label (old vs new), how many results fall into each category.
 
 Usage:
-    python3 analyze_results.py ../results/experiment_qwen3-8b_linux_1_results.json
+    python3 analyze_results.py ../results/Qwen3.5-9B/title/normal_bit/experiment_Qwen3.5-9B_title_<timestamp>_results.json
 """
 
 import argparse
