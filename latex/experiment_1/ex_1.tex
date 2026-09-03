@@ -73,14 +73,17 @@ Input & Old (exact match only) & New (\texttt{matching.py}) \\
 \end{itemize}
 
 \subsection{Local Inference Setup for Qwen3-8B}
+\label{sec:local-inference-setup}
 
 A second, fully local newer model was wanted for the same quality check, at no API cost. Three approaches were attempted before working inference was reached:
 
 \begin{enumerate}
     \item \textbf{llama-cpp-python}: the first choice, since it reuses the GGUF format and has grammar-constrained decoding support for future work. It failed to build because the local machine's Xcode Command Line Tools were missing C++ standard headers entirely, a broken system toolchain not fixable without a full Command Line Tools reinstall.
     \item \textbf{Ollama}: a prebuilt binary requiring no compilation. This worked, but inspection showed it running entirely on CPU despite the machine having a capable GPU, since the Homebrew-distributed Ollama build does not have Metal support compiled in.
-    \item \textbf{mlx-lm}: Apple's own inference framework, installable via plain \texttt{pip} with no compilation step and Metal-accelerated. This is what was ultimately used. It required a different model format than GGUF, so the \texttt{mlx-community/Qwen3-8B-4bit} checkpoint was downloaded directly.
+    \item \textbf{mlx-lm}: Apple's own inference framework, installable via plain \texttt{pip} with no compilation step and Metal-accelerated. It required a different model format than GGUF, so the \texttt{mlx-community/Qwen3-8B-4bit} checkpoint was downloaded directly.
 \end{enumerate}
+
+mlx-lm on the local Mac is what the small-sample testing below (bug-finding, prompt-structure iteration) ran on. The full 2500-document production run afterward moved to a separate, more capable Linux machine, using Ollama as the local backend there (the Mac's earlier CPU-only Ollama problem did not apply on that machine). That run is what Section~\ref{sec:full-scale-results} actually reports.
 
 \subsubsection{First version: 3-turn prompt}
 
@@ -93,14 +96,15 @@ After the fix, this version reached 40\% success, 60\% misclassified, and 0\% ha
 The 3-turn structure required 3 model calls per document for only one scored answer, which is wasteful at the full 2500-document scale. The three turns were collapsed into a single combined prompt, reducing the cost to one model call per document. This version reached 55\% success, 40\% misclassified, and 5\% hallucination on the same small sample, with the first genuine hallucination observed (an answer of \texttt{machine learning}, which is not one of the 19 topics). The generic-fallback pattern persisted but shifted label, from \texttt{information technology} to \texttt{information retrieval}.
 
 \subsection{Full-Scale Results: Matching Fix and Model Generation Effects}
+\label{sec:full-scale-results}
 
 \subsubsection{Qwen3-8B, titles, 2500 documents}
 
-Table~\ref{tab:qwen-titles-2500} shows the result of running the single-prompt version on the full 2500-document dataset using titles as the document representation.
+Table~\ref{tab:qwen-titles-2500} shows the result of running the single-prompt version on the full 2500-document dataset using titles as the document representation, on the Linux machine via Ollama, as noted in Section~\ref{sec:local-inference-setup}.
 
 \begin{table}[h]
 \centering
-\caption{Qwen3-8B, titles, 2500 documents}
+\caption{Qwen3-8B (Ollama backend), titles, 2500 documents}
 \label{tab:qwen-titles-2500}
 \begin{tabular}{lccc}
 \toprule
@@ -122,7 +126,7 @@ Table~\ref{tab:qwen-abstracts-2500} shows the same setup using abstracts instead
 
 \begin{table}[h]
 \centering
-\caption{Qwen3-8B, abstracts, 2500 documents}
+\caption{Qwen3-8B (Ollama backend), abstracts, 2500 documents}
 \label{tab:qwen-abstracts-2500}
 \begin{tabular}{lccc}
 \toprule
@@ -138,32 +142,30 @@ The same \texttt{computer vision} pattern appeared in the abstracts run: 136 of 
 
 Unlike the original paper, abstracts did not produce more hallucinations than titles for this model (8.6\% versus 7.2\% under old matching, 3.2\% versus 3.1\% under new matching, both essentially flat). The paper reported a jump from 25\% to 33\% hallucination when moving from titles to abstracts. Success and misclassification rates are also roughly flat between titles and abstracts for this model, so Qwen3-8B does not reproduce the paper's title-versus-abstract effect at all.
 
-\subsubsection{Claude and a second Qwen3-8B run}
+\subsubsection{Claude}
 
-Two further full 2500-document runs were completed, covering both titles and abstracts, for Claude and for a second Qwen3-8B configuration using a llama.cpp backend. Table~\ref{tab:claude-cpp-comparison} reports the results under new matching. The abstract-field script for Claude attempted prompt caching, but every prompt fell under Anthropic's minimum cacheable size, so caching never actually activated. This affected only cost and latency, not the answers themselves.
+A further full 2500-document run was completed for Claude, covering both titles and abstracts. Table~\ref{tab:claude-comparison} reports the results under new matching. The abstract-field script attempted prompt caching, but every prompt fell under Anthropic's minimum cacheable size, so caching never actually activated. This affected only cost and latency, not the answers themselves.
 
 \begin{table}[h]
 \centering
-\caption{Claude and Qwen3-8B (llama.cpp backend), 2500 documents, new matching}
-\label{tab:claude-cpp-comparison}
+\caption{Claude, 2500 documents, new matching}
+\label{tab:claude-comparison}
 \begin{tabular}{lccc}
 \toprule
 Run & Success & Misclassified & Hallucination \\
 \midrule
-Qwen3-8B (llama.cpp), titles & 67.5\% & 29.8\% & 2.8\% \\
-Qwen3-8B (llama.cpp), abstracts & 66.5\% & 30.3\% & 3.2\% \\
 Claude, titles & 70.9\% & 27.6\% & 1.5\% \\
 Claude, abstracts & 74.0\% & 23.3\% & 2.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Two findings stand out from this comparison:
+\begin{itemize}
+    \item \textbf{Hallucination collapses for Claude, regardless of document representation.} The paper reported 25\% (titles) and 33\% (abstracts). Claude stays under 3\% on both. Combined with Qwen3-8B's own low hallucination rate (Table~\ref{tab:qwen8b-allruns}), this looks like a model-generation effect rather than a title-versus-abstract effect: newer, better instruction-following models simply produce far less unparseable output in the first place.
+    \item \textbf{Claude favors abstracts over titles.} This later turned out to match Qwen3-8B's own result once run at native bf16 precision (Section~\ref{sec:model-size-setup}), rather than being an outlier.
+\end{itemize}
 
-\begin{enumerate}
-    \item \textbf{Hallucination collapses for both newer models, regardless of document representation.} The paper reported 25\% (titles) and 33\% (abstracts). Both Qwen3-8B and Claude stay under 4\% in every run. This looks like a model-generation effect rather than a title-versus-abstract effect: newer, better instruction-following models simply produce far less unparseable output in the first place.
-    \item \textbf{Titles versus abstracts diverge in opposite directions depending on the model, at least under this backend.} Qwen3-8B here is consistent with the earlier local run: titles slightly outperform abstracts. Claude shows the opposite pattern, with abstracts clearly outperforming titles. At the time this looked like evidence that whether additional context helps depends on the specific model. That conclusion needed revising once Qwen3-8B was later run on its native bf16 precision instead of a quantized backend, see Section~\ref{sec:model-size-setup}: the direction flips, and titles versus abstracts turns out to be sensitive to backend and precision for this model, not a stable per-model property either.
-\end{enumerate}
+For infrastructure completeness: Qwen3-8B was also run through GGUF Q4\_K\_M via llama.cpp before settling on native Hugging Face \texttt{transformers} as the backend used throughout this section. It is documented in Table~\ref{tab:qwen8b-allruns} for completeness, not treated as a separate finding here. (The Ollama backend is discussed separately in Section~\ref{sec:local-inference-setup}, it produced the dataset used for the matching-fix demonstration above, not a minor side attempt.)
 
 \subsubsection{Overall results comparison}
 
@@ -181,8 +183,8 @@ Paper (Llama 3 8B, titles, 2500 docs, 5 runs) & 50\% & 25\% & 25\% \\
 Paper (Llama 3 8B, abstracts, 2500 docs, 5 runs) & 50\% & 17\% & 33\% \\
 Qwen3-8B local, 3-turn, small sample & 40\% & 60\% & 0\% \\
 Qwen3-8B local, single-prompt, small sample & 55\% & 40\% & 5\% \\
-Qwen3-8B local, single-prompt, 2500 docs, titles & 66.6\% & 30.3\% & 3.1\% \\
-Qwen3-8B local, single-prompt, 2500 docs, abstracts & 66.3\% & 30.5\% & 3.2\% \\
+Qwen3-8B (Ollama), single-prompt, 2500 docs, titles & 66.6\% & 30.3\% & 3.1\% \\
+Qwen3-8B (Ollama), single-prompt, 2500 docs, abstracts & 66.3\% & 30.5\% & 3.2\% \\
 Qwen3-8B (llama.cpp), 2500 docs, titles & 67.5\% & 29.8\% & 2.8\% \\
 Qwen3-8B (llama.cpp), 2500 docs, abstracts & 66.5\% & 30.3\% & 3.2\% \\
 Claude, 2500 docs, titles & 70.9\% & 27.6\% & 1.5\% \\
@@ -483,6 +485,7 @@ abstract & 4-bit & 77.0\% & 22.9\% & 0.1\% \\
 \begin{table}[h]
 \centering
 \caption{Qwen3-8B (non-3.5), all runs}
+\label{tab:qwen8b-allruns}
 \begin{tabular}{clccc}
 \toprule
 Field & Precision & Success & Misclassified & Hallucination \\
