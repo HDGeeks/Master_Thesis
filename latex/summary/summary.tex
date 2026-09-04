@@ -12,6 +12,7 @@
 
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{placeins}
 \usepackage[hidelinks]{hyperref}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -29,7 +30,7 @@
 
 \pagestyle{plain}
 
-\title{\sffamily\vspace{-2em} Zero-Shot Topic Labeling: Extensions and Model Comparison\\[0.3em]\large Supervisor Meeting Summary}
+\title{\sffamily\vspace{-2em} Zero-Shot Topic Labeling: Extensions and Model Comparison\\[0.3em]\large Supervisor Meeting - Experiment-1}
 \author{\sffamily Daniel Tesfai}
 \date{\sffamily \today}
 
@@ -46,6 +47,7 @@
     \item Two extensions investigated: (1) fixing the matching step, (2) testing newer models and model size.
 \end{itemize}
 
+\FloatBarrier
 \section{Extension 1: Matching Fix}
 
 \begin{itemize}
@@ -68,6 +70,7 @@ Input & Old matching & New matching \\
 
 At full scale (Qwen3-8B, titles): 103/2500 answers (4.1\%) recovered by the fix, all the literal string \texttt{computer vision}, 83 became successes, 20 became misclassified, 0 stayed unresolved.
 
+\FloatBarrier
 \section{Extension 2: Newer Models vs.\ Paper Baseline}
 
 \begin{table}[h]
@@ -91,6 +94,7 @@ Claude Haiku 4.5, abstracts & 74.0\% & 23.3\% & 2.7\% \\
     \item Titles vs.\ abstracts: at native precision, Qwen3-8B and Claude both favor abstracts, matching every Qwen3.5 size tested in Section 4. An earlier GGUF-quantized run of Qwen3-8B had shown the opposite (titles ahead), which in hindsight looks like a precision artifact of that specific backend, not a genuine per-model difference.
 \end{itemize}
 
+\FloatBarrier
 \section{Extension 3: Does Model Size Matter?}
 
 Same task, same prompt, Qwen3.5 family at five sizes (0.8B to 27B).
@@ -114,11 +118,12 @@ Size & Titles & Abstracts \\
     \item 0.8B already beats the paper's Llama 3 8B baseline (52.1\% vs 50\%), a model ten times its size, from an older generation.
 \end{itemize}
 
+\FloatBarrier
 \section{Bonus Finding: Quantization Sensitivity Scales With Size}
 
 \begin{itemize}
     \item \textbf{What:} storing and computing a model's weights with fewer bits than the precision it was trained in. Here: 16-bit floating point (bf16) reduced to 4-bit. A lossy compression of the model's parameters, not the model itself.
-    \item \textbf{How:} weights are grouped into small blocks, each block gets a scale factor so its original range of values can be represented with only 16 discrete levels (4 bits) instead of the full 16-bit range. Weights are converted back to a working precision (``dequantized'') just before each computation, so this introduces a small, bounded amount of numerical error per weight, not a change to the model's architecture or training.
+    % \item \textbf{How:} weights are grouped into small blocks, each block gets a scale factor so its original range of values can be represented with only 16 discrete levels (4 bits) instead of the full 16-bit range. Weights are converted back to a working precision (``dequantized'') just before each computation, so this introduces a small, bounded amount of numerical error per weight, not a change to the model's architecture or training.
     \item \textbf{Why:} roughly 4x less memory per parameter. This is what let the 27B checkpoint (needs $\sim$54GB in bf16) fit entirely on a single 24GB GPU, avoiding a much slower fallback where the excess spills into system RAM. It can also increase inference speed, since less data has to move through memory per token generated.
 \end{itemize}
 
@@ -126,7 +131,7 @@ Size & Titles & Abstracts \\
 \centering
 \begin{tabular}{llccc}
 \toprule
-Size & Field & bf16 & 4-bit & Difference \\
+Size & Field & bf16 (default) & 4-bit & Difference \\
 \midrule
 0.8B & titles & 52.1\% & 39.2\% & \textbf{-12.9 pts} \\
 0.8B & abstracts & 53.7\% & 27.6\% & \textbf{-26.1 pts} \\
@@ -140,9 +145,10 @@ Size & Field & bf16 & 4-bit & Difference \\
 \begin{itemize}
     \item Small models are fragile under 4-bit quantization, 0.8B loses over a quarter of its accuracy edge.
     \item 4B and up are effectively indifferent, gains and losses under 1.5 points.
-    \item Found by accident (a script bug applied quantization to every size, not only 27B), but every repeat run came back bit-identical, generation is fully deterministic, so this is a real precision effect, not noise.
 \end{itemize}
 
+\FloatBarrier
+\clearpage
 \section{Full Results Table}
 
 \begin{table}[h]
@@ -170,21 +176,29 @@ Qwen3.5-27B, abstracts (4-bit) & 77.0\% & 22.9\% & 0.1\% \\
 \end{tabular}
 \end{table}
 
+\FloatBarrier
+\section{Titles vs.\ Abstracts}
+
+\begin{itemize}
+    \item Abstracts beat titles in every single run tested, across all five Qwen3.5 sizes, Qwen3-8B, and Claude Haiku 4.5, no exceptions.
+    \item The gap is small and fairly stable, roughly 1--3 points, smallest for the 27B model (+1.0 pt) and largest for Claude Haiku 4.5 (+3.1 pts). More input text helps a little across the board, but it never changes which model or size wins.
+\end{itemize}
+
+\FloatBarrier
 \section{Conclusion}
 
 \begin{itemize}
-    \item \textbf{Extension 1 (matching fix):} mainly moves the hallucination column, not the model's actual answers. 4.1\% of Qwen3-8B title answers were wrongly counted as hallucination due to fragile exact-string matching; the fix recovered most of them into success. Part of the paper's reported hallucination rate is a measurement artifact, not only a model failure.
-    \item \textbf{Extension 2 (newer models):} mainly collapses hallucination, from 25--33\% (paper) to under 4\% for every newer model tested, while success rises 17--30 points and misclassified stays roughly flat or rises slightly. Newer, better instruction-tuned models are far better at staying inside the controlled vocabulary; that alone accounts for most of the improvement over the paper's baseline, not necessarily better topic judgment.
+    \item \textbf{Extension 1 (matching fix):} mainly moves the hallucination column, not the model's actual answers. 4.1\% of Qwen3-8B title answers were wrongly counted as hallucination due to fragile exact-string matching. The fix recovered most of them into success. 
+    \item \textbf{Extension 2 (newer models):} mainly collapses hallucination, from 25--33\% (paper) to under 4\% for every newer model tested, while success rises 17--30 points and misclassified stays roughly flat or rises slightly. 
     \item \textbf{Extension 3 (model size):} hallucination stays low and flat across every size tested (0.6\% to 2.4\%, no trend with size), so hallucination is a generation/training effect, not a size effect. What moves with size is the success/misclassified split: 0.8B misclassifies nearly half the time (47.3\%/43.9\%), 9B misclassifies about a fifth of the time. Size affects whether the model picks the \emph{correct} topic, not whether it stays inside the vocabulary, and this effect does not improve indefinitely, it peaks at 9B and reverses at 27B.
     \item \textbf{Taken together:} the three extensions target different parts of the original failure mode. The matching fix and newer models both attack hallucination, one through evaluation robustness, the other through instruction-following, while model size mainly shifts the success/misclassified balance, that is, topic judgment, with diminishing and eventually reversing returns.
 \end{itemize}
 
+\FloatBarrier
 \section{Open Questions for Discussion}
 
 \begin{itemize}
     \item Which direction next: cost optimization and multi-label evaluation, or few-shot prompting?
-    \item Worth running Qwen3.5-2B to fill the one gap in the size sweep?
-    \item How to frame the 9B-highest-accuracy finding in the thesis narrative?
 \end{itemize}
 
 \end{document}
